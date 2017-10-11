@@ -1,18 +1,141 @@
 'use strict';
 
+// KML implementation with data, does not work
 /*
-require(["esri/map", "dojo/domReady!"], function(Map) {
-	let map = new Map("map", {
-		center: [-118, 34.5],
-		zoom: 8,
-		basemap: "topo"
-	});
-});
-*/
+var map, kml, kmlGeoms, bufferGraphics, gp;
+    require([
+      "esri/map", "esri/layers/KMLLayer", "esri/layers/GraphicsLayer",
+      "esri/SpatialReference", "esri/graphic",
+      "esri/tasks/GeometryService", "esri/tasks/Geoprocessor",
+      "esri/tasks/BufferParameters", "esri/tasks/FeatureSet",
+      "esri/symbols/SimpleFillSymbol", "esri/symbols/SimpleLineSymbol",
+      "esri/urlUtils",
+      "dojo/parser", "dojo/_base/array", "esri/Color", "dojo/_base/connect",
+      "dojo/number", "dojo/dom", "dojo/dom-style", "dojo/dom-attr",
+
+      "dijit/layout/BorderContainer", "dijit/layout/ContentPane",
+      "dojo/domReady!"
+    ], function(
+      Map, KMLLayer, GraphicsLayer,
+      SpatialReference, Graphic,
+      GeometryService, Geoprocessor,
+      BufferParameters, FeatureSet,
+      SimpleFillSymbol, SimpleLineSymbol,
+      urlUtils,
+      parser, arrayUtils, Color, connect,
+      number, dom, domStyle, domAttr
+    ) {
+
+      urlUtils.addProxyRule({
+        proxyUrl: "/proxy/",
+        urlPrefix: "sampleserver1.arcgisonline.com"
+      });
+
+      map = new Map("map", {
+        basemap: "topo",
+        center: [-77.8, 39.3],
+        zoom: 10
+      });
+
+      parser.parse();
+
+      // Graphics layer for the buffer
+      bufferGraphics = new GraphicsLayer();
+      map.addLayer(bufferGraphics);
+
+      var kmlUrl =
+        "https://esri.box.com/shared/static/iiqwmrs9915iioa3j4tpmwo5nujwdj2i.kmz";
+      kml = new KMLLayer(kmlUrl);
+      map.addLayer(kml);
+
+      // The geoprocessor
+      var gpUrl =
+        "https://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Population_World/GPServer/PopulationSummary";
+      gp = new Geoprocessor(gpUrl);
+      gp.setOutputSpatialReference({
+        wkid: 102100
+      });
+
+      kml.on("load", function(evt) {
+        // Collect the line features from the KML layer
+        kmlGeoms = arrayUtils.map(evt.layer.getLayers()[0].graphics,
+          function(g) {
+            return g.geometry;
+          });
+
+        // Send to a function to do the buffer
+        bufferKML();
+      });
+
+      // Re-calculate the buffer and population when buffer distance changes
+      connect.connect(dom.byId("bufferDistance"), "onchange", bufferKML);
+
+      function bufferKML() {
+        bufferGraphics.clear();
+        dom.byId("totalPop").innerHTML = "";
+        domStyle.set("loading", "display", "inline-block");
+        domAttr.set("bufferDistance", "disabled", true);
+
+        var bufferDistance = dom.byId("bufferDistance").value;
+        var params = new BufferParameters();
+        params.geometries = kmlGeoms;
+        params.distances = [bufferDistance];
+        params.bufferSpatialReference = new SpatialReference({
+          "wkid": 102100
+        });
+        params.outSpatialReference = map.spatialReference;
+        params.unit = GeometryService.UNIT_STATUTE_MILE;
+        params.unionResults = true;
+        //This service is for development and testing purposes only. We recommend that you create your own geometry service for use within your applications.
+        var gsUrl =
+          "https://utility.arcgisonline.com/ArcGIS/rest/services/Geometry/GeometryServer";
+        var gs = new GeometryService(gsUrl);
+        gs.buffer(params, showBuffer);
+      }
+
+      function showBuffer(buffer) {
+        // Add the buffer graphic to the map
+        var polySym = new SimpleFillSymbol()
+          .setColor(new Color([56, 102, 164, 0.4]))
+          .setOutline(
+            new SimpleLineSymbol()
+            .setColor(new Color([56, 102, 164, 0.8]))
+          );
+        var bufferGraphic = new Graphic(buffer[0], polySym);
+        bufferGraphics.add(bufferGraphic);
+
+        // Send buffer to runction to calculate population
+        calcPop(bufferGraphic);
+      }
+
+      function calcPop(aoi) {
+        // Create a feature set for the population zonal stats GP service
+        var fset = new FeatureSet();
+        fset.features = [aoi];
+
+        var params = {
+          "inputPoly": fset
+        };
+        gp.execute(params, handlePop);
+      }
+
+      function handlePop(result) {
+        if (result[0] && result[0].value.features[0].attributes.hasOwnProperty(
+            'SUM')) {
+          var pop = number.format((result[0].value.features[0].attributes.SUM)
+            .toFixed() + '');
+          dom.byId('totalPop').innerHTML = pop;
+        } else {
+          alert("Unable to get population summary. Please try again.");
+        }
+        domStyle.set("loading", "display", "none");
+        domAttr.set("bufferDistance", "disabled", false);
+      }
+  });*/
 
 // esrimap version #1, geographical location center 
 
-let map;
+/*let map;
 let graphic;
 let currLocation;
 let watchId;
@@ -122,50 +245,4 @@ require([
       	graphic = new Graphic(pt, symbol);
       	map.graphics.add(graphic);
       }
-  });
-  
-
-// Google map implementation with KML
-
-/*function initMap() {
-	let map = new google.maps.Map(document.getElementById('map'), {
-		center: new google.maps.LatLng(60.56537850464181, 24.697265625),
-		zoom: 8,
-		mapTypeId: 'terrain'
-	});
-
-	var kmlLayer = new google.maps.KmlLayer({
-		url: 'http://users.metropolia.fi/~arttutii/Confused/Oppilaaksiotto_alueet_2015_16.kml',
-		suppressInfoWindows: true,
-		map: map
-	});
-
-	kmlLayer.addListener('click', function(kmlEvent) {
-		var text = kmlEvent.featureData.description;
-		showInContentWindow(text);
-	});
-
-	function showInContentWindow(text) {
-		var sidediv = document.getElementById('schoolInfo');
-		sidediv.innerHTML = text;
-	};
-
-	var myLocationMarker = new google.maps.Marker({
-		map: map,
-		title: 'You are here.'
-	});
-
-	if (navigator.geolocation) {
-		navigator.geolocation.getCurrentPosition(function(pos) {
-			var me = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
-			myLocationMarker.setPosition(me);
-			map.setCenter(me);
-		}, function(error) {
-			console.log(error);
-		});
-	} 
-};
-$(window).load(function(){
-    // Populate map after window has been loaded. 
-    initMap();
-});*/
+  });*/

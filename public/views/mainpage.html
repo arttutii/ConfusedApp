@@ -1,4 +1,4 @@
-<div id="mainPage">
+<div id="mainPage" data-ng-init="initMap()">
   <div class="row" id="mainPageHeader">
     <div class="col-md-12">
       <h1 class="display-3" id="mainPageTitle">Kouluhaku</h1>
@@ -13,13 +13,22 @@
       </div>
     </div>
     <div class="row">
+      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 form-group" id="searchArea" >
+        <input type="text" class="form-control" placeholder="Kirjoita osoite" id="searchBar" ng-model="searchQuery" ng-keyup="$event.keyCode == 13 && mapSearch()">
+        <input class="form-control btn btn-default col-sm12 col-md-12 col-lg-12 col-xl-12" type="submit" ng-click="mapSearch()" value="Hae">
+      </div>
+    </div>
+    <div class="row">
       <div class="col-md-6" id="map"></div>
       <div class="col-md-1"> </div>
-      <div class="col-md-4" id="schoolInfo">
-        <h2>Here will be information of school</h2>
-        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-        <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+      <div class="col-md-4" id="infoArea">
+        <div id="schoolInfo">
+          <h2>Here will be information of school</h2>
+          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+        </div>
+        <button class="btn btn-primary">Apply</button>
       </div>
+
       <div class="col-md-1"> </div>
     </div>
 
