@@ -1,41 +1,33 @@
-<div id="mainPage" data-ng-init="initMap()">
+<div id="mainPage" class="col-md-12" data-ng-init="initMap()">
   <div class="row" id="mainPageHeader">
     <div class="col-md-12">
-      <h1 class="display-3" id="mainPageTitle">Kouluhaku</h1>
-    </div>
+      <h2 class="" id="mainPageTitle">Etsi kouluja läheltäsi</h1>
   </div>
+</div>
 
-  <div class="container">
-    <!-- Example row of columns -->
-    <div class="row">
-      <div class="col-md-12" id="secondNav">
-        <h2>Toinen navigointipalkki tässä</h2>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 form-group" id="searchArea" >
-        <input type="text" class="form-control" placeholder="Kirjoita osoite" id="searchBar" ng-model="searchQuery" ng-keyup="$event.keyCode == 13 && mapSearch()">
-        <input class="form-control btn btn-default col-sm12 col-md-12 col-lg-12 col-xl-12" type="submit" ng-click="mapSearch()" value="Hae">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6" id="map"></div>
-      <div class="col-md-1"> </div>
-      <div class="col-md-4" id="infoArea">
+<div class="container">   
+   <div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 form-group" id="searchArea" >
+      <input type="text" class="form-control" placeholder="Kirjoita osoite" id="searchBar" ng-model="searchQuery" ng-keyup="$event.keyCode == 13 && mapSearch()">
+      <input class="form-control btn btn-default col-sm-12 col-md-12 col-lg-12 col-xl-12" type="submit" ng-click="mapSearch()" value="Hae">
+  </div>
+</div>
+<div class="row">
+    <div class="col-md-8" id="map"></div>
+    <div class="col-md-4" id="infoArea">
         <div id="schoolInfo">
-          <h2>Here will be information of school</h2>
-          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+            <h3 id="schoolTitle"></h3>
+            <img id="schoolPic">
+            <p id="schoolDesc"></p>
+            <button class="btn btn-default" ng-show="">Apply</button>
         </div>
-        <button class="btn btn-primary">Apply</button>
-      </div>
-
-      <div class="col-md-1"> </div>
     </div>
+</div>
+</div>
 
-    <hr>
+<hr>
 
-    <footer>
-      <p>&copy; Company 2017</p>
-    </footer>
-  </div>
+<footer>
+    <p>&copy; Company 2017</p>
+</footer>
 </div>

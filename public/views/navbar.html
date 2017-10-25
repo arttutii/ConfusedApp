@@ -1,6 +1,31 @@
-<nav class="navbar navbar-custom navbar-fixed-top">
-  <a class="navbar-brand" href="#">
-    <img src="../assets/images/simbaa.gif" width="30" height="30" class="d-inline-block align-top" alt="">
-    Helsingin Kaupunki
-  </a>
-</nav>
+<div id="navbar" class="col-md-12">
+	<nav class="navbar navbar-custom navbar-fixed-top">
+		<div class="navbar-header">
+			<button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#">
+				<img src="../assets/images/helsinki-logo-2017.png" width="60" height="40" class="d-inline-block align-top" alt="">
+			</a>
+			<div class="collapse navbar-collapse">
+				<ul class="nav navbar-nav navbar-right">
+					<li>
+						<a>
+						<input type="button" class="btn btn-default" ng-value="loggedIn ? 'Kirjaudu ulos' : 'Kirjaudu sisään'">
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+	</nav>
+
+	<div class="row" id="secondNavDiv">
+		<div class="col-md-12" id="secondNav">
+			<h2>Toinen navigointipalkki tässä</h2>
+		</div>
+	</div>
+</div>

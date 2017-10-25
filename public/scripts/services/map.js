@@ -1,7 +1,19 @@
-app.service('MapService', function($log, VariableFactory) {
+app.service('MapService', function($log, $rootScope, VariableFactory) {
 	// This module returns functions to be used elsewhere
 
 	return {
+		showContent: (e, text) => {
+			switch(e){
+				case 'info':
+				console.log(text)
+					$('#schoolTitle').text(text.name);
+					$('#schoolDesc').html(text.desc);
+					break;
+				case 'pic':
+					$('#schoolPic').attr('src',text);
+					break;
+			}
+		},
 
 		initMap: () => {
 			VariableFactory.map = new google.maps.Map(document.getElementById('map'), {
@@ -23,6 +35,7 @@ app.service('MapService', function($log, VariableFactory) {
 				showInContentWindow(text);
 			});*/
 
+
 			let schoolPins = new google.maps.KmlLayer({
 				url: 'http://users.metropolia.fi/~arttutii/Confused/palvelukartta.kml',
 				suppressInfoWindows: true,
@@ -36,13 +49,11 @@ app.service('MapService', function($log, VariableFactory) {
 					info: kmlEvent.featureData.infoWindowHtml
 				}
 				console.log(kmlEvent);
-				showInContentWindow(text);
-			});
+				// show the content on the side div
+				$rootScope.$broadcast('showContent', {e: 'info', text: text});
+				$rootScope.$broadcast('getPlacePhoto', text.name);
 
-			showInContentWindow = (text) => {
-				var sidediv = document.getElementById('schoolInfo');
-				sidediv.innerHTML = text.info;
-			};
+			});
 
 			let myLocationMarker = new google.maps.Marker({
 				map: map,
@@ -75,6 +86,27 @@ app.service('MapService', function($log, VariableFactory) {
 					console.log(error);
 				});
 			} 
+
+		},
+
+		getPlacePhoto: (placeId) => {
+			var request = {
+				placeId: placeId
+			};
+
+			service = new google.maps.places.PlacesService(VariableFactory.map);
+			service.getDetails(request, (place, status) => {
+				if (status == google.maps.places.PlacesServiceStatus.OK) {
+					let photos = place.photos;
+
+					console.log(place);
+					$rootScope.$broadcast('showContent', 
+					{
+						e: 'pic', 
+						text: photos ? photos[0].getUrl({'maxWidth': 400, 'maxHeight': 400}) : 'https://http.cat/404'
+					});
+				}
+			});
 
 		}
 
