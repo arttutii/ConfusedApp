@@ -2,23 +2,28 @@
   <div class="row" id="mainPageHeader">
     <div class="col-md-12">
       <h2 class="" id="mainPageTitle">Etsi kouluja läheltäsi</h1>
+      </div>
   </div>
-</div>
 
-<div class="container">   
-   <div class="row">
-    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 form-group" id="searchArea" >
-      <input type="text" class="form-control" placeholder="Kirjoita osoite" id="searchBar" ng-model="searchQuery" ng-keyup="$event.keyCode == 13 && mapSearch()">
-      <input class="form-control btn btn-default col-sm-12 col-md-12 col-lg-12 col-xl-12" type="submit" ng-click="mapSearch()" value="Hae">
+  <div class="container">   
+     <div class="row">
+        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 form-group" id="searchArea" >
+            <div class="box">
+              <div class="container-1">
+                  <span class="icon"><i class="fa fa-search"></i></span>
+                  <input type="search" id="searchBar" class="form-control" placeholder="Kirjoita osoite"  ng-model="searchQuery" ng-keyup="$event.keyCode == 13 && mapSearch('searchInput')" />
+              </div>
+          </div>
+          <input class="form-control btn btn-default col-sm-12 col-md-12 col-lg-12 col-xl-12" type="submit" ng-click="mapSearch()" value="Hae">
+      </div>
   </div>
-</div>
-<div class="row">
+  <div class="row">
     <div class="col-md-8" id="map"></div>
     <div class="col-md-4" id="infoArea">
         <div id="schoolInfo">
-            <h3 id="schoolTitle"></h3>
+            <h3 id="schoolTitle">Käyttöohjeet</h3>
             <img id="schoolPic">
-            <p id="schoolDesc"></p>
+            <p id="schoolDesc">Valitse kartalla oleva koulu nähdäksesi sen tietoja.<br> Voit hakea myös kirjoittamalla osoitteen ylläolevaan hakukenttään.</p>
             <button class="btn btn-default" ng-show="">Apply</button>
         </div>
     </div>

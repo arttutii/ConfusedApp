@@ -5,13 +5,15 @@ app.service('MapService', function($log, $rootScope, VariableFactory) {
 		showContent: (e, text) => {
 			switch(e){
 				case 'info':
-				console.log(text)
-					$('#schoolTitle').text(text.name);
-					$('#schoolDesc').html(text.desc);
-					break;
+				$log.info(text)
+				$('#schoolTitle').text(text.name);
+				$('#schoolDesc').html(text.desc);
+				break;
+
 				case 'pic':
-					$('#schoolPic').attr('src',text);
-					break;
+				$('#schoolPic').attr('src',text);
+				break;
+
 			}
 		},
 
@@ -74,7 +76,7 @@ app.service('MapService', function($log, $rootScope, VariableFactory) {
 
 			if (navigator.geolocation) {
 				navigator.geolocation.getCurrentPosition(function(pos) {
-					var me = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+					let me = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
 					myLocationMarker.setPosition(me);
 
 					setTimeout(function(){
@@ -90,7 +92,7 @@ app.service('MapService', function($log, $rootScope, VariableFactory) {
 		},
 
 		getPlacePhoto: (placeId) => {
-			var request = {
+			let request = {
 				placeId: placeId
 			};
 

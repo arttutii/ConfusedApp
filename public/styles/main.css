@@ -18,21 +18,35 @@ body {
 	background-color: #ffffff;
 }
 
+/* Search bar styling */
 #searchBar {
 	text-align: center;
+	/* Location icon on the right side of search bar */
+	background-image: url('../assets/images/location-icon.svg');
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: right center;
 }
 
-.icon-bar {
-	background-color: #ffffff !important;
+.container-1 {
+	vertical-align: middle;
+	white-space: nowrap;
+	position: relative;
 }
 
-.navbar-right a{
-	text-decoration: none;
-	background-color: transparent !important;
+.container-1 .icon {
+	position: absolute;
+	top: 50%;
+	margin-left: 10px;
+	margin-top: -10px;
+	z-index: 1;
+	color: #4f5b66;
 }
+/* End search bar styling */
+
 
 #schoolDesc {
-    word-wrap: break-word;
+	word-wrap: break-word;
 }
 
 #schoolPic {
@@ -92,8 +106,4 @@ pulse
 	overflow: hidden;
 	float: left;
 	border: thin solid #333;
-}
-
-#capture {
-	float:bottom:;
 }

@@ -3,12 +3,6 @@
 var app = angular.module('ConfusedApp', []);
 app.controller('MainController',function($scope, $rootScope, $log, $http, $document, MapService, VariableFactory){
 
-	$scope.$watch(function() {
-		return $scope.searchQuery;
-	}, function(newValue) {
-    	// check for specific value
-    });
-
     // Listeners for function calls
     $scope.$on('showContent', (event, data) => {
     	MapService.showContent(data.e, data.text);
@@ -16,13 +10,22 @@ app.controller('MainController',function($scope, $rootScope, $log, $http, $docum
 
     $scope.$on('getPlacePhoto', (event, data) => {
     	$scope.searchQuery = data;
-    	$scope.mapSearch(data, (response) => {
-    		MapService.getPlacePhoto(response);
+    	$scope.mapSearch('placeId', (response) => {
+    		//MapService.getPlacePhoto(response);
     	});
     })
 
     $scope.mapSearch = (check, callback) => {
-    	let query = $scope.searchQuery.trim().replace(/\s/g, "+");
+
+    	let tempQuery = $scope.searchQuery.split('/');
+    	$log.info(tempQuery);
+    	let query;
+
+    	// If query length has additional specifications, select only the string which has school name
+    	let id = (tempQuery.length > 1) ? 1 : 0;
+    	query = tempQuery[id].trim().replace(/\s/g, "+");
+
+    	$log.info(query);
     	let url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' 
     	+ query + '&key=' + 'AIzaSyDMOfgmDAkbyNlYNzMt4GcmpsYqymC5ptQ';
 
@@ -34,17 +37,25 @@ app.controller('MainController',function($scope, $rootScope, $log, $http, $docum
     		}
 
     	}).then(function successCallback(response) {
-    		// If function is called expecting to return the place id of address, return it
-    		if (check){
-    			callback(response.data.results[0].place_id);
-    		}
 
-    		console.log(response.data);
     		let locData = response.data.results[0].geometry.location;
     		let newLocation = new google.maps.LatLng(locData.lat, locData.lng);
 
-    		VariableFactory.map.setCenter(newLocation);
-    		VariableFactory.map.setZoom(15);
+    		// Check for the first argument of the function call
+    		switch(check){
+    			// if Place ID is called, return it
+    			case 'placeId':
+    			callback(response.data.results[0].place_id);
+    			break;
+    			// If the search happens through the search input field and not by pins, center map on location
+    			case 'searchInput':
+    			VariableFactory.map.setCenter(newLocation);
+    			VariableFactory.map.setZoom(15);
+    			break;
+
+    		}
+
+    		$log.info(response.data);
 
     		if ($scope.searchMarker){
     			$scope.searchMarker.setMap(null);
@@ -55,6 +66,7 @@ app.controller('MainController',function($scope, $rootScope, $log, $http, $docum
     			position: newLocation,
     			title: response.data.results[0].formatted_address
     		});
+
     		// Set the actual location on the text input
     		$scope.searchQuery = response.data.results[0].formatted_address;
     		// Get photo of the location and show it on side div
@@ -68,7 +80,14 @@ app.controller('MainController',function($scope, $rootScope, $log, $http, $docum
 
     // Initialize map when document has loaded
     $scope.initMap = () => {
-    	MapService.initMap();
+    	try {
+    		MapService.initMap();
+    	} catch (e) {
+    		// if the device can not connect to the google maps services, show message on screen
+    		$log.error(e);
+    		$('#map').html(`<h3 style="text-align: center; background-color: #ffffff;">
+    			Could not connect to Google Maps, please reload page.</h3>`);
+    	}
     };
     
 });
