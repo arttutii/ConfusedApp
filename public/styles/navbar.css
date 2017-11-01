@@ -37,4 +37,6 @@
 
 #helsinki-logo {
 	height: 40px;
+	position: relative;
+	top: -10px;
 }

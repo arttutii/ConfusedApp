@@ -23,7 +23,7 @@ body {
 }
 
 .checkbox {
-	padding-bottom: 20%;
+	padding: 10px;
 }
 
 #checkbox-all {
@@ -36,6 +36,9 @@ body {
 
 #checkbox-swedish {
 	color: #cccc00;
+}
+#checkbox-english {
+	color: #ff0000;
 }
 
 /* Search bar styling */

@@ -5,7 +5,7 @@ app.controller('MainController',function($scope, $rootScope, $log, $http, $docum
 	// Check all filters at start
 	$scope.allchecked = true;
 
-    // Listeners for function calls
+    // Listeners for function calls that $scope.$broadcast can activate from different controllers
     $scope.$on('showContent', (event, data) => {
     	MapService.showContent(data.e, data.text);
     })
@@ -13,24 +13,22 @@ app.controller('MainController',function($scope, $rootScope, $log, $http, $docum
     $scope.$on('getPlacePhoto', (event, data) => {
     	$scope.searchQuery = data;
     	$scope.mapSearch('placeId', (response) => {
-    		//MapService.getPlacePhoto(response);
+    		// do nothing, mapsearch requires callback function
     	});
     })
 
     $scope.mapSearch = (check, callback) => {
 
+    	// Names sometimes have too long descriptions, split the unnecessary information
     	let tempQuery = $scope.searchQuery.split('/');
-    	$log.info(tempQuery);
-    	let query;
 
     	// If query length has additional specifications, select only the string which has school name
     	let id = (tempQuery.length > 1) ? 1 : 0;
-    	query = tempQuery[id].trim().replace(/\s/g, "+");
-    	// split the query again, just in case there is a comma in the name
+    	let query = tempQuery[id].trim().replace(/\s/g, "+");
+    	// split the name again, just in case there is a comma with additional info
     	query = query.split(',');
     	query = query[0]
 
-    	$log.info(query);
     	let url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' 
     	+ query + '&key=' + 'AIzaSyDMOfgmDAkbyNlYNzMt4GcmpsYqymC5ptQ';
 
@@ -45,6 +43,10 @@ app.controller('MainController',function($scope, $rootScope, $log, $http, $docum
 
     		let locData = response.data.results[0].geometry.location;
     		let newLocation = new google.maps.LatLng(locData.lat, locData.lng);
+    		if (locData){
+
+    		}
+
 
     		// Check for the first argument of the function call
     		switch(check){
@@ -61,17 +63,18 @@ app.controller('MainController',function($scope, $rootScope, $log, $http, $docum
     		}
 
     		$log.info(response.data);
-
+    		// if the searchmarker of previous search is on map, remove it 
     		if ($scope.searchMarker){
     			$scope.searchMarker.setMap(null);
     		}
-
+    		// add new marker of the current search
     		$scope.searchMarker = new google.maps.Marker({
     			map: VariableFactory.map,
     			position: newLocation,
     			title: response.data.results[0].formatted_address
     		});
 
+    		// If the search was done via search input field, show different text on info area 
     		if (check == 'searchInput'){
     			$rootScope.$broadcast('showContent', {e: 'pic', text: ''});
     			let text = {
@@ -91,20 +94,19 @@ app.controller('MainController',function($scope, $rootScope, $log, $http, $docum
     	});
     }
 
+    // Function for handling filtering with the checkboxes
+    // TODO, have to figure out how to get individual school's language
     $scope.clickCheckBox = (event) => {
     	let id = event.target.id;
     	switch(id){
     		case 'all':
-    			$log.info('all')
-    			
+    			//$log.info('all')
     			break;
     		case 'finnish':
-    			$log.info('finnish')
-    			
+    			//$log.info('finnish')   			
     			break;
     		case 'swedish':
-    			$log.info('swedish')
-
+    			//$log.info('swedish')
     			break;    	
     		}
 	};

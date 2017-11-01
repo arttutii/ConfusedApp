@@ -4,12 +4,13 @@ app.service('MapService', function($log, $rootScope, VariableFactory) {
 	return {
 		showContent: (e, text) => {
 			switch(e){
+				// handles the title and description text on the info area
 				case 'info':
 				$log.info(text)
 				$('#schoolTitle').text(text.name);
 				$('#schoolDesc').html(text.desc);
 				break;
-
+				// add the path of picture for schools
 				case 'pic':
 				$('#schoolPic').attr('src',text);
 				break;
@@ -37,7 +38,7 @@ app.service('MapService', function($log, $rootScope, VariableFactory) {
 				showInContentWindow(text);
 			});*/
 
-
+			// Get the school data from KML file and add them on the map
 			let schoolPins = new google.maps.KmlLayer({
 				url: 'http://users.metropolia.fi/~arttutii/Confused/palvelukartta.kml',
 				suppressInfoWindows: true,
@@ -51,7 +52,7 @@ app.service('MapService', function($log, $rootScope, VariableFactory) {
 					info: kmlEvent.featureData.infoWindowHtml
 				}
 				console.log(kmlEvent);
-				// show the content on the side div
+				// show the content on the info area
 				$rootScope.$broadcast('showContent', {e: 'info', text: text});
 				$rootScope.$broadcast('getPlacePhoto', text.name);
 
@@ -74,6 +75,7 @@ app.service('MapService', function($log, $rootScope, VariableFactory) {
 				}
 			});
 
+			// locate the user and pinpoint them on the map
 			if (navigator.geolocation) {
 				navigator.geolocation.getCurrentPosition(function(pos) {
 					let me = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
@@ -92,6 +94,7 @@ app.service('MapService', function($log, $rootScope, VariableFactory) {
 		},
 
 		getPlacePhoto: (placeId) => {
+			// argument should contain the Google API's place ID for the location
 			let request = {
 				placeId: placeId
 			};
@@ -100,6 +103,9 @@ app.service('MapService', function($log, $rootScope, VariableFactory) {
 			service.getDetails(request, (place, status) => {
 				if (status == google.maps.places.PlacesServiceStatus.OK) {
 					let photos = place.photos;
+
+					// if there are photos for the location, add them to the info area
+					// else, show a error image
 
 					console.log(place);
 					$rootScope.$broadcast('showContent', 

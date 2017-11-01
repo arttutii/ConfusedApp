@@ -6,18 +6,18 @@
   </div>
 
   <div class="container">   
-   <div class="row">
-    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 form-group" id="searchArea" >
-        <div class="box">
-          <div class="container-1">
-              <span class="icon"><i class="fa fa-search"></i></span>
-              <input type="search" id="searchBar" class="form-control" placeholder="Kirjoita osoite"  ng-model="searchQuery" ng-keyup="$event.keyCode == 13 && mapSearch('searchInput')" />
+     <div class="row">
+        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 form-group" id="searchArea" >
+            <div class="box">
+              <div class="container-1">
+                  <span class="icon"><i class="fa fa-search"></i></span>
+                  <input type="search" id="searchBar" class="form-control" placeholder="Kirjoita osoite"  ng-model="searchQuery" ng-keyup="$event.keyCode == 13 && mapSearch('searchInput')" maxlength="50"/>
+              </div>
           </div>
+          <input class="form-control btn btn-default col-sm-12 col-md-12 col-lg-12 col-xl-12" type="submit" ng-click="mapSearch()" value="Hae">
       </div>
-      <input class="form-control btn btn-default col-sm-12 col-md-12 col-lg-12 col-xl-12" type="submit" ng-click="mapSearch()" value="Hae">
   </div>
-</div>
-<div class="row">
+  <div class="row">
     <div class="col-md-2" id="filterArea">
         <div class="checkbox">
             <label id="checkbox-all" ><input type="checkbox" value="" id="all" ng-click="clickCheckBox($event)"  ng-model="allchecked" >All Schools</label>
@@ -28,6 +28,9 @@
       <div class="checkbox">
           <label id="checkbox-swedish" ><input type="checkbox" value="" ng-click="clickCheckBox($event)" ng-checked="allchecked" id="swedish" >Swedish</label>
       </div>
+      <div class="checkbox">
+          <label id="checkbox-english" ><input type="checkbox" ng-checked="allchecked" ng-click="clickCheckBox($event)"  value="" id="english" >English</label>
+      </div>
   </div>
   <div class="col-md-6" id="map"></div>
   <div class="col-md-4" id="infoArea">
@@ -35,7 +38,7 @@
         <h3 id="schoolTitle">Käyttöohjeet</h3>
         <img id="schoolPic">
         <p id="schoolDesc">Valitse kartalla oleva koulu nähdäksesi sen tietoja.<br> Voit hakea myös kirjoittamalla osoitteen ylläolevaan hakukenttään.</p>
-        <button class="btn btn-default" ng-show="">Apply</button>
+        <button class="btn btn-default" ng-show="loggedIn">Apply</button>
     </div>
 </div>
 </div>
