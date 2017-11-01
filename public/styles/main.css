@@ -18,6 +18,26 @@ body {
 	background-color: #ffffff;
 }
 
+#filterArea {
+	background-color: #000000;
+}
+
+.checkbox {
+	padding-bottom: 20%;
+}
+
+#checkbox-all {
+	color: #ffffff;
+}
+
+#checkbox-finnish {
+	color: #0000ff;
+}
+
+#checkbox-swedish {
+	color: #cccc00;
+}
+
 /* Search bar styling */
 #searchBar {
 	text-align: center;

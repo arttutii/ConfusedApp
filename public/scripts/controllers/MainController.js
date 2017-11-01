@@ -2,6 +2,8 @@
 
 var app = angular.module('ConfusedApp', []);
 app.controller('MainController',function($scope, $rootScope, $log, $http, $document, MapService, VariableFactory){
+	// Check all filters at start
+	$scope.allchecked = true;
 
     // Listeners for function calls
     $scope.$on('showContent', (event, data) => {
@@ -24,6 +26,9 @@ app.controller('MainController',function($scope, $rootScope, $log, $http, $docum
     	// If query length has additional specifications, select only the string which has school name
     	let id = (tempQuery.length > 1) ? 1 : 0;
     	query = tempQuery[id].trim().replace(/\s/g, "+");
+    	// split the query again, just in case there is a comma in the name
+    	query = query.split(',');
+    	query = query[0]
 
     	$log.info(query);
     	let url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' 
@@ -67,19 +72,45 @@ app.controller('MainController',function($scope, $rootScope, $log, $http, $docum
     			title: response.data.results[0].formatted_address
     		});
 
-    		// Set the actual location on the text input
-    		$scope.searchQuery = response.data.results[0].formatted_address;
-    		// Get photo of the location and show it on side div
-    		MapService.getPlacePhoto(response.data.results[0].place_id);
+    		if (check == 'searchInput'){
+    			$rootScope.$broadcast('showContent', {e: 'pic', text: ''});
+    			let text = {
+    				desc: 'Jos haluat nähdä koulun tiedot kartalla, paina koulun kohdalla olevaa sinistä merkkiä.',
+    				name: 'Paina merkkiä kartalla'
+    			}
+    			$rootScope.$broadcast('showContent', {e: 'info', text: text});
+    		} else {
+    			// Set the actual location on the text input
+    			$scope.searchQuery = response.data.results[0].formatted_address;
+	    		// Get photo of the location and show it on side div
+	    		MapService.getPlacePhoto(response.data.results[0].place_id);
+	    	}
 
     	}, function errorCallback(response) {
     		$log.error("ERROR:", response.data);
     	});
     }
 
+    $scope.clickCheckBox = (event) => {
+    	let id = event.target.id;
+    	switch(id){
+    		case 'all':
+    			$log.info('all')
+    			
+    			break;
+    		case 'finnish':
+    			$log.info('finnish')
+    			
+    			break;
+    		case 'swedish':
+    			$log.info('swedish')
+
+    			break;    	
+    		}
+	};
 
     // Initialize map when document has loaded
-    $scope.initMap = () => {
+    $scope.initialize = () => {
     	try {
     		MapService.initMap();
     	} catch (e) {
