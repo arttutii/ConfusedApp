@@ -1,7 +1,25 @@
 'use strict';
 
-var app = angular.module('ConfusedApp', []);
-app.controller('MainController',function($scope, $rootScope, $log, $http, $document, MapService, VariableFactory){
+var app = angular.module('ConfusedApp', ['ui.router']);
+	// Router of the application view, directs the html views on the ui-view element
+	app.config(function($urlRouterProvider, $stateProvider){
+		$stateProvider
+
+		.state('mainpage', {
+			url: '/',
+			templateUrl: '../../views/mainpage.html'
+		})
+
+		.state('personinfo', {
+			url: '/tiedot',
+			templateUrl: '../../views/tiedot.html'
+		})
+
+		$urlRouterProvider.otherwise('/');
+
+	});
+
+	app.controller('MainController',function($scope, $rootScope, $log, $http, $document, MapService, VariableFactory){
 	// Check all filters at start
 	$scope.allchecked = true;
 
@@ -40,11 +58,17 @@ app.controller('MainController',function($scope, $rootScope, $log, $http, $docum
     		}
 
     	}).then(function successCallback(response) {
+    		let locData, newLocation;
 
-    		let locData = response.data.results[0].geometry.location;
-    		let newLocation = new google.maps.LatLng(locData.lat, locData.lng);
-    		if (locData){
-
+    		// If the query does not find a location, show an alert window
+    		try {
+    			locData = response.data.results[0].geometry.location;
+    			newLocation = new google.maps.LatLng(locData.lat, locData.lng);
+    		} catch (e){
+    			$('#inputAlert').show();
+    			setTimeout(() => {
+    				$('#inputAlert').fadeOut();
+    			}, 3500)
     		}
 
 
@@ -89,9 +113,9 @@ app.controller('MainController',function($scope, $rootScope, $log, $http, $docum
 	    		MapService.getPlacePhoto(response.data.results[0].place_id);
 	    	}
 
-    	}, function errorCallback(response) {
-    		$log.error("ERROR:", response.data);
-    	});
+	    }, function errorCallback(response) {
+	    	$log.error("ERROR:", response.data);
+	    });
     }
 
     // Function for handling filtering with the checkboxes
@@ -102,14 +126,14 @@ app.controller('MainController',function($scope, $rootScope, $log, $http, $docum
     		case 'all':
     			//$log.info('all')
     			break;
-    		case 'finnish':
+    			case 'finnish':
     			//$log.info('finnish')   			
     			break;
-    		case 'swedish':
+    			case 'swedish':
     			//$log.info('swedish')
     			break;    	
     		}
-	};
+    	};
 
     // Initialize map when document has loaded
     $scope.initialize = () => {

@@ -111,7 +111,7 @@ app.service('MapService', function($log, $rootScope, VariableFactory) {
 					$rootScope.$broadcast('showContent', 
 					{
 						e: 'pic', 
-						text: photos ? photos[0].getUrl({'maxWidth': 400, 'maxHeight': 400}) : 'https://http.cat/404'
+						text: photos ? photos[0].getUrl({'maxWidth': 400, 'maxHeight': 400}) : '../../assets/images/place_404.jpg'
 					});
 				}
 			});

@@ -1,6 +1,5 @@
 .navbar-custom {
 	background-color: #000000;
-	border-bottom: 3px solid #99a3b2 !important;
 }
 /* change the brand and text color */
 .navbar-custom .navbar-brand,
@@ -26,13 +25,29 @@
 	background-color: transparent !important;
 }
 
-#secondNav {
-	background-color: #ffffff;
-	margin-bottom: 10px;
+#loginBtn, #logoutBtn{
+	position: relative;
+	right: 10px;
+	top: 5px;
 }
 
 #secondNavDiv {
 	height: 60px;
+}
+
+#secondNav {
+	background-color: #ffffff;
+	margin-bottom: 10px;
+	vertical-align: middle;
+}
+
+#secondNav *{
+	top: 5px;
+	position: relative
+}
+
+#childSelect {
+	height: 75%;
 }
 
 #helsinki-logo {

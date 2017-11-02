@@ -13,10 +13,6 @@ app.use('/modules', express.static(__dirname + '/node_modules'));
 app.listen(3000);
 console.log('Serving');
 
-app.get('/mainpage', (req,res) => {
-    res.sendFile('index.html', { root: 'public' });
-});
-
 app.get('/login', (req,res) => {
 	// With a proper backend, here should happen user authentication from database
 	// Instead, lets simulate a user object 
@@ -39,5 +35,5 @@ app.get('/login', (req,res) => {
 
 	console.log(tempUser);
 	// Send user object back to client
-	res.send(JSON.stringify({user: tempUser}));
+	res.send(JSON.stringify(tempUser));
 });

@@ -1,4 +1,4 @@
-<div id="navbar" class="col-md-12">
+<div id="navbar" class="col-md-12" ng-controller="LoginController">
 	<nav class="navbar navbar-custom navbar-fixed-top">
 		<div class="navbar-header">
 			<button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
@@ -10,10 +10,10 @@
 			<a class="navbar-brand" href="#">
 				<img id ="helsinki-logo" src="../assets/images/helsinki-logo-2017.png" class="d-inline-block align-top" alt="">
 			</a>
-			<div class="collapse navbar-collapse" ng-controller="LoginController as login">
+			<div class="collapse navbar-collapse" >
 				<ul class="nav navbar-nav navbar-right">
 					<li class="dropdown">
-						<input type="button" class="btn btn-default" value="Kirjaudu ulos" ng-show="loggedIn">
+						<input type="button" id="logoutBtn" class="btn btn-default" value="Kirjaudu ulos" ng-show="loggedIn" ng-click="logout();">
 						<input type="button" id="loginBtn" class="btn btn-default dropdown-toggle" data-toggle="dropdown" value="Kirjaudu sisään" ng-hide="loggedIn">
 						<ul class="dropdown-menu" style="padding: 15px;min-width: 250px;">
 							<li>
@@ -56,7 +56,16 @@
 
 	<div class="row" id="secondNavDiv">
 		<div class="col-md-12" id="secondNav">
-			<h2>Toinen navigointipalkki tässä</h2>
+			<div class="pull-left" id="navigationButtons">
+				<input type="button" class="btn btn-default" value="Koulukartta" ng-show="loggedIn;view == 'map'">
+				<input type="button" class="btn btn-default" value="Henkilötiedot" ng-show="loggedIn">
+			</div>
+
+			<div class="form-group pull-right" id="selectDiv" ng-show="loggedIn">
+				<select class="form-control" id="childSelect">
+					<option id="child-{{$index}}" ng-repeat="child in parent.children">{{child.name}}</option>
+				</select>
+			</div>
 		</div>
 	</div>
 </div>

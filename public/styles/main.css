@@ -2,6 +2,11 @@ body {
 	padding-top: 60px;
 }
 
+html {
+	background-color: #0272C6;
+
+}
+
 #mainPage {
 	background-color: #0272C6;
 }
@@ -14,6 +19,11 @@ body {
 	text-align: center;
 }
 
+#inputAlert {
+	display: none;
+	word-wrap: break-word;
+}
+
 #infoArea {
 	background-color: #ffffff;
 }
@@ -24,6 +34,7 @@ body {
 
 .checkbox {
 	padding: 10px;
+
 }
 
 #checkbox-all {
