@@ -1,27 +1,34 @@
 'use strict';
 
+/** TODO:
+
+
+**/
+
 var app = angular.module('ConfusedApp', ['ui.router']);
 	// Router of the application view, directs the html views on the ui-view element
 	app.config(function($urlRouterProvider, $stateProvider){
 		$stateProvider
 
-		.state('mainpage', {
+		.state('map', {
 			url: '/',
 			templateUrl: '../../views/mainpage.html'
 		})
 
-		.state('personinfo', {
+		.state('info', {
 			url: '/tiedot',
-			templateUrl: '../../views/tiedot.html'
-		})
+			templateUrl: '../../views/info.html'
+		}) 
 
 		$urlRouterProvider.otherwise('/');
 
 	});
 
-	app.controller('MainController',function($scope, $rootScope, $log, $http, $document, MapService, VariableFactory){
+	app.controller('MainController',function($scope, $rootScope, $log, $state, $http, $document, MapService, VariableFactory){
 	// Check all filters at start
 	$scope.allchecked = true;
+	// Save the state of the current view in a variable 
+	$scope.state = $state;
 
     // Listeners for function calls that $scope.$broadcast can activate from different controllers
     $scope.$on('showContent', (event, data) => {
@@ -100,6 +107,7 @@ var app = angular.module('ConfusedApp', ['ui.router']);
 
     		// If the search was done via search input field, show different text on info area 
     		if (check == 'searchInput'){
+    			$scope.showApplyBtn = false;
     			$rootScope.$broadcast('showContent', {e: 'pic', text: ''});
     			let text = {
     				desc: 'Jos haluat nähdä koulun tiedot kartalla, paina koulun kohdalla olevaa sinistä merkkiä.',
@@ -107,6 +115,7 @@ var app = angular.module('ConfusedApp', ['ui.router']);
     			}
     			$rootScope.$broadcast('showContent', {e: 'info', text: text});
     		} else {
+    			$scope.showApplyBtn = true;
     			// Set the actual location on the text input
     			$scope.searchQuery = response.data.results[0].formatted_address;
 	    		// Get photo of the location and show it on side div
