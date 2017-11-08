@@ -1,18 +1,5 @@
-<div id="mainPage" class="col-md-12" data-ng-init="initialize()">
-  <div class="row" id="mainPageHeader">
-    <div class="col-md-2">
-    </div>
-    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-      <h2 class="" id="mainPageTitle">Etsi kouluja läheltäsi</h2>
-  </div>
-
-</div>
-
-<div class="container">   
-   <div class="row">
-    <div class="col-md-2">
-        <!-- Empty column to match searchbar with map -->
-    </div>
+<div id="mainPage" class="col-md-12" data-ng-init="initialize()">  
+   <!-- <div class="row">
     <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 form-group" id="searchArea" >
         <div class="box">
           <div class="container-1">
@@ -25,9 +12,9 @@
   <div class="alert alert-danger col-md-6 col-lg-6 col-xl-6 col-sm-12" id="inputAlert">
     <strong>Virhe!</strong> Haullasi ei löytynyt osoitetta, kokeile uudelleen toisella hakusanalla.
 </div>
-</div>
+</div> -->
 <div class="row">
-    <div class="col-md-2" id="filterArea">
+    <!-- <div class="col-md-2" id="filterArea">
         <div class="checkbox">
             <label id="checkbox-all" ><input type="checkbox" value="" id="all" ng-click="clickCheckBox($event)"  ng-model="allchecked" >All Schools</label>
         </div>
@@ -40,17 +27,16 @@
       <div class="checkbox">
           <label id="checkbox-english" ><input type="checkbox" ng-checked="allchecked" ng-click="clickCheckBox($event)"  value="" id="english" >English</label>
       </div>
-  </div>
-  <div class="col-md-6" id="map"></div>
-  <div class="col-md-4" id="infoArea">
+  </div> -->
+  <div class="col-md-12" id="map"></div>
+  <!-- <div class="col-md-4" id="infoArea">
     <div id="schoolInfo">
         <h3 id="schoolTitle">Käyttöohjeet</h3>
         <img id="schoolPic">
         <p id="schoolDesc">Valitse kartalla oleva koulu nähdäksesi sen tietoja.<br> Voit hakea myös kirjoittamalla osoitteen ylläolevaan hakukenttään.</p>
         <button class="btn btn-default" ng-show="loggedIn && showApplyBtn">Hae kouluun</button>
     </div>
-</div>
-</div>
+</div> -->
 </div>
 
 <hr>

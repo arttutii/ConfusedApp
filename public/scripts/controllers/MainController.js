@@ -107,6 +107,7 @@ var app = angular.module('ConfusedApp', ['ui.router']);
 
     		// If the search was done via search input field, show different text on info area 
     		if (check == 'searchInput'){
+    			// Do not show school apply button in the info area when no school info is present 
     			$scope.showApplyBtn = false;
     			$rootScope.$broadcast('showContent', {e: 'pic', text: ''});
     			let text = {
@@ -115,6 +116,7 @@ var app = angular.module('ConfusedApp', ['ui.router']);
     			}
     			$rootScope.$broadcast('showContent', {e: 'info', text: text});
     		} else {
+    			// Show the apply button with the school information
     			$scope.showApplyBtn = true;
     			// Set the actual location on the text input
     			$scope.searchQuery = response.data.results[0].formatted_address;
