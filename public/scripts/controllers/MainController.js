@@ -1,6 +1,9 @@
 'use strict';
 
 /** TODO:
+	** APP
+	Create https
+
 	** Search functionality
 	Search input enter key on the right side as icon
 	Remove Geolocation icon from the right side of search bar
