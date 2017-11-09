@@ -1,19 +1,15 @@
-<div id="mainPage" class="col-md-12" data-ng-init="initialize()">  
-   <!-- <div class="row">
-    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 form-group" id="searchArea" >
-        <div class="box">
-          <div class="container-1">
-              <span class="icon"><i class="fa fa-search"></i></span>
-              <input type="search" id="searchBar" class="form-control" placeholder="Kirjoita osoite" ng-model="searchQuery" ng-keyup="$event.keyCode == 13 && mapSearch('searchInput')" maxlength="50"/>
-          </div>
-      </div>
-      <input class="form-control btn btn-default col-sm-12 col-md-12 col-lg-12 col-xl-12" type="submit" ng-click="mapSearch()" value="Hae">
-  </div>
-  <div class="alert alert-danger col-md-6 col-lg-6 col-xl-6 col-sm-12" id="inputAlert">
-    <strong>Virhe!</strong> Haullasi ei löytynyt osoitetta, kokeile uudelleen toisella hakusanalla.
-</div>
-</div> -->
-<div class="row">
+<div id="mainPage" class="col-md-12" data-ng-init="initialize()" ng-controller="MainController">  
+    <div class="row" id="mapWrapper">
+        <div class="col-sm-6 col-md-6 col-lg-6 col-xl-5 form-group overMap" id="searchArea" >
+            <h3 id="searchTitle">Hae kouluja läheltäsi</h3>
+            <div class="input-group">
+                <span id="searchIcon" class="icon"><i class="fa fa-search"></i></span>
+                <input type="text" id="searchBar" class="form-control" placeholder="Kirjoita osoite" ng-model="searchQuery" ng-keyup="$event.keyCode == 13 && mapSearch('searchInput')" maxlength="50">
+                <span class="input-group-btn">
+                    <button class="btn btn-secondary" ng-click="mapSearch('searchInput')" type="button">Hae</button>
+                </span>
+            </div>
+        </div>
     <!-- <div class="col-md-2" id="filterArea">
         <div class="checkbox">
             <label id="checkbox-all" ><input type="checkbox" value="" id="all" ng-click="clickCheckBox($event)"  ng-model="allchecked" >All Schools</label>
@@ -29,14 +25,14 @@
       </div>
   </div> -->
   <div class="col-md-12" id="map"></div>
-  <!-- <div class="col-md-4" id="infoArea">
+  <div class="col-lg-3 col-md-4 col-sm-4 col-xs-5 overMap" id="infoArea">
     <div id="schoolInfo">
         <h3 id="schoolTitle">Käyttöohjeet</h3>
         <img id="schoolPic">
         <p id="schoolDesc">Valitse kartalla oleva koulu nähdäksesi sen tietoja.<br> Voit hakea myös kirjoittamalla osoitteen ylläolevaan hakukenttään.</p>
-        <button class="btn btn-default" ng-show="loggedIn && showApplyBtn">Hae kouluun</button>
+        <button id="applyBtn" class="btn btn-default" ng-show="loggedIn && showApplyBtn">Hae kouluun</button>
     </div>
-</div> -->
+</div> 
 </div>
 
 <hr>

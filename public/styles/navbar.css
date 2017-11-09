@@ -31,6 +31,12 @@
 	top: 5px;
 }
 
+#helsinki-logo {
+	height: 40px;
+	position: relative;
+	top: -10px;
+}
+
 #secondNavDiv {
 	height: 60px;
 }
@@ -50,8 +56,7 @@
 	height: 75%;
 }
 
-#helsinki-logo {
-	height: 40px;
-	position: relative;
-	top: -10px;
+#inputAlert {
+	display: none;
+	word-wrap: break-word;
 }

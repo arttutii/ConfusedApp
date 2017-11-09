@@ -1,7 +1,17 @@
 'use strict';
 
 /** TODO:
+	** Search functionality
+	Search input enter key on the right side as icon
+	Remove Geolocation icon from the right side of search bar
+	
+	** Other pages
+	Students information page content
 
+	** Navbar
+	Implement alert feature in the middle of the secondary navigation
+	Tom's new mobile design and stuff
+	Add language options in the middle of navbar
 
 **/
 

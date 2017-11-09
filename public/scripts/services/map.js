@@ -20,7 +20,16 @@ app.service('MapService', function($log, $rootScope, VariableFactory) {
 
 		initMap: () => {
 			VariableFactory.map = new google.maps.Map(document.getElementById('map'), {
-				mapTypeId: 'terrain'
+				mapTypeId: 'terrain',
+				fullscreenControl: false,
+				mapTypeControl: false,
+				zoomControlOptions: {
+					position: google.maps.ControlPosition.LEFT_BOTTOM
+				},
+				streetViewControlOptions: {
+					position: google.maps.ControlPosition.BOTTOM_LEFT
+				},
+
 			});
 			let map = VariableFactory.map;
 

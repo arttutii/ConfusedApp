@@ -14,20 +14,75 @@ body {
 	text-align: center;
 }
 */
-#inputAlert {
-	display: none;
-	word-wrap: break-word;
+
+#mapWrapper {
+	position: relative;
+}
+
+#map {
+	height: 500px;
+	width: 100%;
+	overflow: hidden;
+	float: left;
+	border: thin solid #333;
+}
+
+.overMap {
+	position: absolute !important;
+	z-index: 3 !important;
 }
 
 #infoArea {
 	background-color: #ffffff;
+	right: 15px;
+	top: 10px;
+	box-shadow: 10px 10px 5px #888888;
+	max-height: 480px;
 }
+
+#schoolDesc {
+	word-wrap: break-word;
+}
+
+#schoolPic {
+	width: 100%;
+	max-height: 180px;
+}
+
+#applyBtn {
+	margin-bottom: 10px;
+}
+
+#searchArea {
+	left: -5px;
+} 
+
+#searchTitle {
+	margin-top: 3px;
+	margin-bottom: 3px;
+	position: relative;
+	left: 7px;
+}
+
+
+/* Search bar styling */
+#searchBar {
+	padding-left: 30px;
+}
+
+#searchIcon {
+	position: absolute;
+	margin-left: 10px;
+	margin-top: 7px;
+	z-index: 5;
+}
+/* End search bar styling */
 
 #filterArea {
 	background-color: #000000;
 }
 
-.checkbox {
+.checkbox {	
 	padding: 10px;
 
 }
@@ -45,94 +100,4 @@ body {
 }
 #checkbox-english {
 	color: #ff0000;
-}
-
-/* Search bar styling */
-#searchBar {
-	text-align: center;
-	/* Location icon on the right side of search bar */
-	background-image: url('../assets/images/location-icon.svg');
-    background-size: auto 100%;
-    background-repeat: no-repeat;
-    background-position: right center;
-}
-
-.container-1 {
-	vertical-align: middle;
-	white-space: nowrap;
-	position: relative;
-}
-
-.container-1 .icon {
-	position: absolute;
-	top: 50%;
-	margin-left: 10px;
-	margin-top: -10px;
-	z-index: 1;
-	color: #4f5b66;
-}
-/* End search bar styling */
-
-
-#schoolDesc {
-	word-wrap: break-word;
-}
-
-#schoolPic {
-	width: 100%;
-	max-height: 300px;
-}
-
-@-webkit-keyframes
-pulse
-{
-	0%
-	{
-		opacity: 1.0;
-
-	}
-	45%
-	{
-		opacity: .20;
-
-	}
-	100%
-	{
-		opacity: 1.0;
-
-	}
-}
-@-moz-keyframes
-pulse
-{
-	0%
-	{
-		opacity: 1.0;
-	}
-	45%
-	{
-		opacity: .20;
-
-	}
-	100%
-	{
-		opacity: 1.0;
-	}
-}
-
-#map_graphics_layer {
-	-webkit-animation-duration: 3s;
-	-webkit-animation-iteration-count: infinite;
-	-webkit-animation-name: pulse;
-	-moz-animation-duration: 3s;
-	-moz-animation-iteration-count: infinite;
-	-moz-animation-name: pulse;
-}
-
-#map {
-	height: 500px;
-	width: 100%;
-	overflow: hidden;
-	float: left;
-	border: thin solid #333;
 }

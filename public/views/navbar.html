@@ -61,6 +61,10 @@
 				<input type="button" class="btn btn-default" value="Henkilötiedot" ng-show="loggedIn" ui-sref="info">
 			</div>
 
+			<div class="alert alert-danger col-md-6 col-lg-6 col-xl-6 col-sm-12" id="inputAlert">
+				<strong>Virhe!</strong> Haullasi ei löytynyt osoitetta, kokeile uudelleen toisella hakusanalla.
+			</div>
+
 			<div class="form-group pull-right" id="selectDiv" ng-show="loggedIn">
 				<select class="form-control" id="childSelect">
 					<option id="child-{{$index}}" ng-repeat="child in parent.children">{{child.name}}</option>
