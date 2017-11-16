@@ -3,10 +3,6 @@
 /** TODO:
 	** APP
 	Create https
-
-	** Search functionality
-	Search input enter key on the right side as icon
-	Remove Geolocation icon from the right side of search bar
 	
 	** Other pages
 	Students information page content
@@ -14,7 +10,7 @@
 	** Navbar
 	Implement alert feature in the middle of the secondary navigation
 	Tom's new mobile design and stuff
-	Add language options in the middle of navbar
+	Add language options in the middle of navbar (npm angular-localize)
 
 **/
 
@@ -30,7 +26,13 @@ var app = angular.module('ConfusedApp', ['ui.router']);
 
 		.state('info', {
 			url: '/tiedot',
-			templateUrl: '../../views/info.html'
+			templateUrl: '../../views/info.html',
+			controller: function(VariableFactory, $state) {
+				// Prevent user from visiting user info page if they are not logged in
+				if (VariableFactory.user == null){   
+					$state.go('map');
+				}
+			}
 		}) 
 
 		$urlRouterProvider.otherwise('/');
@@ -42,6 +44,22 @@ var app = angular.module('ConfusedApp', ['ui.router']);
 	$scope.allchecked = true;
 	// Save the state of the current view in a variable 
 	$scope.state = $state;
+	// Filters to show on filter area
+	$scope.filters = [
+		{
+			label: 'Finnish',
+			state: false,
+			id: 0
+		}, {
+			label: 'English',
+			state: false,
+			id: 1
+		}, {
+			label: 'Swedish',
+			state: false,
+			id: 2
+		}
+	];
 
     // Listeners for function calls that $scope.$broadcast can activate from different controllers
     $scope.$on('showContent', (event, data) => {

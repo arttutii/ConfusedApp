@@ -1,7 +1,7 @@
 'use strict';
 
 var app = angular.module('ConfusedApp');
-app.controller('LoginController',function($scope, $rootScope, $log, VariableFactory){
+app.controller('LoginController',function($scope, $rootScope, $log, VariableFactory, $state){
     $scope.loggedIn = false;
     $scope.parent = {};
 
@@ -10,8 +10,11 @@ app.controller('LoginController',function($scope, $rootScope, $log, VariableFact
             return res.json();
         }).then(res => {
             console.log(res);
-            // set scope variable as the parent's user object
+            // save user object in the factory and in the scope
+            VariableFactory.user = res;
             $scope.parent = res;
+            // set the child select default value as the first child of the user
+            $scope.selectedChild = $scope.parent.children[0];
 
             // after successful log in, change loggedIn variable state that some elements show/hide.
             // also toggle the popup to close it
@@ -23,6 +26,8 @@ app.controller('LoginController',function($scope, $rootScope, $log, VariableFact
 
     $scope.logout = () => {
         $scope.loggedIn = false;
+        // if the user is at the Personal information page, redirect them to map page
+        if ($state.is('info')) {$state.go('map')};
     }
 
 });

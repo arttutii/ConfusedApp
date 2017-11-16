@@ -10,34 +10,25 @@
                 </span>
             </div>
         </div>
-    <!-- <div class="col-md-2" id="filterArea">
-        <div class="checkbox">
-            <label id="checkbox-all" ><input type="checkbox" value="" id="all" ng-click="clickCheckBox($event)"  ng-model="allchecked" >All Schools</label>
+        <div class="col-md-2 col-sm-3 overMap" id="filterArea">
+            <div class="filterDiv" ng-repeat="f in filters">
+                <button ng-click="clickCheckBox($event)" class="filterButton" ng-class="{activated : f.state}">
+                    {{f.label}}
+                </button>
+            </div>
         </div>
-        <div class="checkbox">
-          <label id="checkbox-finnish" ><input type="checkbox" ng-checked="allchecked" ng-click="clickCheckBox($event)"  value="" id="finnish" >Finnish</label>
-      </div>
-      <div class="checkbox">
-          <label id="checkbox-swedish" ><input type="checkbox" value="" ng-click="clickCheckBox($event)" ng-checked="allchecked" id="swedish" >Swedish</label>
-      </div>
-      <div class="checkbox">
-          <label id="checkbox-english" ><input type="checkbox" ng-checked="allchecked" ng-click="clickCheckBox($event)"  value="" id="english" >English</label>
-      </div>
-  </div> -->
-  <div class="col-md-12" id="map"></div>
-  <div class="col-lg-3 col-md-4 col-sm-4 col-xs-5 overMap" id="infoArea">
-    <div id="schoolInfo">
-        <h3 id="schoolTitle">Käyttöohjeet</h3>
-        <img id="schoolPic">
-        <p id="schoolDesc">Valitse kartalla oleva koulu nähdäksesi sen tietoja.<br> Voit hakea myös kirjoittamalla osoitteen ylläolevaan hakukenttään.</p>
-        <button id="applyBtn" class="btn btn-default" ng-show="loggedIn && showApplyBtn">Hae kouluun</button>
+        <div class="col-md-12" id="map"></div>
+        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-5 overMap" id="infoArea">
+            <div id="schoolInfo">
+                <h3 id="schoolTitle">Käyttöohjeet</h3>
+                <img id="schoolPic">
+                <p id="schoolDesc">Valitse kartalla oleva koulu nähdäksesi sen tietoja.<br> Voit hakea myös kirjoittamalla osoitteen ylläolevaan hakukenttään.</p>
+                <button id="applyBtn" class="btn btn-default" ng-show="loggedIn && showApplyBtn">Hae kouluun</button>
+            </div>
+        </div> 
     </div>
-</div> 
-</div>
 
-<hr>
-
-<footer>
-    <p>&copy; Team Confused - Metropolia</p>
-</footer>
+    <footer>
+        <p>&copy; Team Confused Metropolia</p>
+    </footer>
 </div>

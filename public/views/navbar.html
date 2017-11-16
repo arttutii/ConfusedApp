@@ -10,7 +10,7 @@
 			<a class="navbar-brand" href="#">
 				<img id ="helsinki-logo" src="../assets/images/helsinki-logo-2017.png" class="d-inline-block align-top" alt="">
 			</a>
-			<div class="collapse navbar-collapse" >
+			<div class="" >
 				<ul class="nav navbar-nav navbar-right">
 					<li class="dropdown">
 						<input type="button" id="logoutBtn" class="btn btn-default" value="Kirjaudu ulos" ng-show="loggedIn" ng-click="logout();">
@@ -57,7 +57,7 @@
 	<div class="row" id="secondNavDiv">
 		<div class="col-md-12" id="secondNav">
 			<div class="pull-left" id="navigationButtons">
-				<input type="button" class="btn btn-default" value="Koulukartta" ng-show="state.is('info')" ui-sref="map">
+				<input type="button" class="btn btn-default" value="Koulukartta" ui-sref="map">
 				<input type="button" class="btn btn-default" value="Henkilötiedot" ng-show="loggedIn" ui-sref="info">
 			</div>
 
@@ -66,8 +66,8 @@
 			</div>
 
 			<div class="form-group pull-right" id="selectDiv" ng-show="loggedIn">
-				<select class="form-control" id="childSelect">
-					<option id="child-{{$index}}" ng-repeat="child in parent.children">{{child.name}}</option>
+				<select class="form-control" id="childSelect" ng-model="selectedChild" data-ng-options="child as child.name for child in parent.children">
+					<option id="child-{{$index}}" value="" hidden></option>
 				</select>
 			</div>
 		</div>

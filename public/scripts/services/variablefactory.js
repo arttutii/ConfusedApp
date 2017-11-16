@@ -3,9 +3,11 @@ app.factory('VariableFactory', function($log) {
 
 	// Map object 	
 	let map;
+	let user;
 
 	return {
 		map,
+		user
 	};
 
 });

@@ -2,18 +2,25 @@ body {
 	padding-top: 60px;
 }
 
-/*#mainPage {
-	background-color: #ffffff;
+/* Activate custom fonts */
+html *{
+	font-family: Grotesk;
 }
 
-#mainPageTitle {
-	color: #ffffff;
+/* Regular font*/
+@font-face {
+    font-family: Grotesk;
+    src: url("../../assets/fonts/HKGrotesk-Regular.woff") format("woff"), 
+    	 url("../../assets/fonts/HKGrotesk-Regular.ttf") format("truetype");
 }
 
-#mainPageHeader {
-	text-align: center;
+/* Bolded font*/
+@font-face {
+    font-family: Grotesk;
+    src: url("../../assets/fonts/HKGrotesk-Bold.woff") format("woff"), 
+    	 url("../../assets/fonts/HKGrotesk-Bold.ttf") format("truetype");
+    font-weight: bold;
 }
-*/
 
 #mapWrapper {
 	position: relative;
@@ -32,6 +39,7 @@ body {
 	z-index: 3 !important;
 }
 
+/* Info area over map style */
 #infoArea {
 	background-color: #ffffff;
 	right: 15px;
@@ -52,7 +60,9 @@ body {
 #applyBtn {
 	margin-bottom: 10px;
 }
+/* Info area end */
 
+/* Search style */
 #searchArea {
 	left: -5px;
 } 
@@ -64,8 +74,6 @@ body {
 	left: 7px;
 }
 
-
-/* Search bar styling */
 #searchBar {
 	padding-left: 30px;
 }
@@ -76,28 +84,27 @@ body {
 	margin-top: 7px;
 	z-index: 5;
 }
-/* End search bar styling */
+/* End search styling */
 
+/* Filter area style */
 #filterArea {
-	background-color: #000000;
+	top: 75px;
 }
 
-.checkbox {	
-	padding: 10px;
-
+.filterButton {	
+	background-color: #ffffff;
+	width: 100%;
+	color: #000000;
+	border: solid 0.5px black;
 }
 
-#checkbox-all {
-	color: #ffffff;
+button.activated {
+	background-color: red;
+	color: red;
 }
 
-#checkbox-finnish {
-	color: #0000ff;
-}
+/* End filter area styling */
 
-#checkbox-swedish {
-	color: #cccc00;
-}
-#checkbox-english {
-	color: #ff0000;
+footer {
+	text-align: center;
 }

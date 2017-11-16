@@ -1,16 +1,35 @@
 <div class="col-md-12">
 	<div class="container">
-		<div class="col-md-3">
-			<h3><b>Personal Information</b></h3>
+		<div class="col-md-4">
+			<h3><b>Henkilötiedot</b></h3>
+			<hr>
+			<p>Nimi: {{selectedChild.name}} </p>
+			<p>Sukupuoli: {{selectedChild.gender}} </p>
+			<p>Syntymäaika: {{selectedChild.birthDate}} </p>
+			<p>Ikä: {{selectedChild.age}} </p>
+			<p>Synnyinpaikka: {{selectedChild.birthPlace}} </p>
+			<p>Asuinpaikkakunta: {{selectedChild.residence}} </p>
+			<p>Kotiosoite: {{selectedChild.address}} </p>
+			<p>Postinumero: {{selectedChild.postalCode}} </p>
+			<p>Puhelinnumero: {{selectedChild.phone ? selectedChild.phone : 'Ei puhelinnumeroa'}} </p>
+			<p>Sähköpostiosoite: {{selectedChild.email ? selectedChild.email : 'Ei Sähköpostiosoitetta'}} </p>
 		</div>
-		<div class="col-md-3">
-			<h3><b>Current Education</b></h3>
+		<div class="col-md-4">
+			<h3><b>Tämänhetkinen koulutus</b></h3>
+			<hr>
+			<b> {{selectedChild.currentEducationName}}</b>
+			<p>Koulutuksen ajankohta:<br>{{selectedChild.currentEducationPeriod}}</p>
+			<b>Yhteystiedot:</b>
+			<p ng-repeat="contact in selectedChild.currentEducationContact">{{contact}}</p>
+			<a href="{{selectedChild.currentEducationHomepage}}">Kotisivulle</a>
 		</div>
-		<div class="col-md-3">
-			<h3><b>Upcoming Education</b></h3>
-		</div>
-		<div class="col-md-3">
-			<h3><b>Account Details</b></h3>
+		<div class="col-md-4">
+			<h3><b>Tulevat koulutukset</b></h3>
+			<hr>
+			<h3> Ei tulevia koulutuksia </h3>
+			<p> Etsi kouluja kartalta ja siirry hakusivulle painamalla painiketta koulun tietoikkunassa.</p>
+			<input type="button" class="btn btn-default" value="Siirry karttaan" ui-sref="map">
+			<br>
 		</div>
 	</div>
 </div>
