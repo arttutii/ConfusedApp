@@ -21,13 +21,13 @@ app.use(forceSSL);
 
 const options = {
   key: fs.readFileSync('encryption/key.pem'),
-  cert: fs.readFileSync('encryption/cert.pem'),
-  ca: fs.readFileSync('encryption/cert.pem')
+  cert: fs.readFileSync('encryption/cert.pem')
 };
 
+app.listen(3000);
 // Configure application to port 3000
-const httpServer = http.createServer(app).listen(3000);
-const httpsServer = https.createServer(options, app).listen(8080);
+/*const httpServer = http.createServer(app).listen(3000);
+const httpsServer = https.createServer(options, app).listen(8080);*/
 
 
 console.log('Serving');
