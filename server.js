@@ -13,6 +13,9 @@ app.use(express.static('public'));
 // Serve node modules for webpage files to usex
 app.use('/modules', express.static(__dirname + '/node_modules'));
 
+// HTTPS for Jelastic
+app.enable('trust proxy');
+
 // Create SSL for HTTPS site
 app.use(forceSSL);
 
