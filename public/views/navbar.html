@@ -1,22 +1,31 @@
 <div id="navbar" class="col-md-12" ng-controller="LoginController">
 	<nav class="navbar navbar-custom navbar-fixed-top">
 		<div class="navbar-header">
-			<button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
-				<span class="sr-only">Toggle navigation</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
 			<a class="navbar-brand" href="#">
 				<img id ="helsinki-logo" src="../assets/images/helsinki-logo-2017.png" class="d-inline-block align-top" alt="">
 			</a>
-			<div class="" >
-				<ul class="nav navbar-nav navbar-right">
+			<div class="">
+				<ul class="nav navbar-nav navbar-right pull-right">
 					<li class="dropdown">
-						<input type="button" id="logoutBtn" class="btn btn-default" value="Kirjaudu ulos" ng-show="loggedIn" ng-click="logout();">
+						
+						<!-- User menu -->
+						<a class="" id="userBtn" ng-show="loggedIn" data-toggle="dropdown" >
+							<img id="user-icon" src="../assets/images/user-icon.svg"  alt="">
+						</a>
+						<!-- Login button with collapseable div -->
 						<input type="button" id="loginBtn" class="btn btn-default dropdown-toggle" data-toggle="dropdown" value="Kirjaudu sisään" ng-hide="loggedIn">
-						<ul class="dropdown-menu" style="padding: 15px;min-width: 250px;">
-							<li>
+						<ul class="dropdown-menu">
+							<!-- Show user menu when logged in -->
+							<li id="userMenu" ng-show="loggedIn">
+								<div class="row">
+									<div class="col-md-12">
+										<p id="parentName">{{parent.name}}</p>
+										<input type="button" class="btn btn-default" id="editUserInfo" value="Muokkaa">
+									</div>
+								</div>
+							</li>
+							<!-- Show login menu when not logged in -->
+							<li id="loginMenu" ng-hide="loggedIn">
 								<div class="row">
 									<div class="col-md-12">
 										<form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
@@ -42,10 +51,15 @@
 							</li>
 							<li class="divider"></li>
 							<li>
-								<input class="btn btn-primary btn-block" type="button" id="signup" value="Rekisteröidy">
-								<a href="">Unohtuiko salasana?</a>
+								<!-- Log out button when logged in -->
+								<input type="button" id="logoutBtn" class="btn btn-default" value="Kirjaudu ulos" ng-show="loggedIn" ng-click="logout();">
+
+								<!-- Registration stuff when not logged in -->
+								<input class="btn btn-primary btn-block" type="button" id="signup" value="Rekisteröidy" ng-hide="loggedIn">
+								<a href="" ng-hide="loggedIn">Unohtuiko salasana?</a>
 							</li>
-						</ul>
+						</ul> 
+						<!-- Login end -->
 					</li>
 
 				</ul>
@@ -71,5 +85,34 @@
 				</select>
 			</div>
 		</div>
+	</div>
+
+	<div class="row" id="mobileNavDiv" ng-controller="MainController">
+		<div class="pull-left col-sm-1 col-xs-1">
+			<a class="" href="#" ng-click="toggleSideBar()">
+				<img id="mobile-menu-icon" src="../assets/images/menu-icon.svg" class="" alt="">
+			</a>
+		</div>
+
+		<div class="input-group col-sm-11 col-xs-10 pull-right">
+			<span id="searchIcon" class="icon"><i class="fa fa-search"></i></span>
+			<input type="text" id="searchBar" class="form-control" placeholder="Kirjoita osoite" ng-model="searchQuery" ng-keyup="$event.keyCode == 13 && mapSearch('searchInput')" maxlength="50">
+			<span class="input-group-btn">
+				<button class="btn btn-secondary" ng-click="mapSearch('searchInput')" type="button">Hae</button>
+				<input type="button" class="btn btn-outline-primary" value="Oma sijainti" ng-click="getCurrentLocation()">
+			</span>
+		</div>
+
+		<!-- Sidebar -->	
+		<div class="w3-sidebar w3-bar-block w3-animate-left" style="display:none" id="sideBar">
+			<div class="form-group" id="selectDiv" ng-show="loggedIn">
+				<select class="form-control" id="childSelect" ng-model="selectedChild" data-ng-options="child as child.name for child in parent.children">
+					<option id="child-{{$index}}" value="" hidden></option>
+				</select>
+			</div>
+			<a href="#" class="w3-bar-item w3-button">Link 2</a>
+			<a href="#" class="w3-bar-item w3-button">Link 3</a>
+		</div>
+
 	</div>
 </div>

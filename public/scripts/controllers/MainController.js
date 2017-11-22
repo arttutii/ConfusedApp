@@ -1,20 +1,15 @@
 'use strict';
 
 /** TODO:
-	** APP
-	Create https
-	
-	** Other pages
-	Students information page content
 
 	** Navbar
 	Implement alert feature in the middle of the secondary navigation
 	Tom's new mobile design and stuff
 	Add language options in the middle of navbar (npm angular-localize)
 
-**/
+	**/
 
-var app = angular.module('ConfusedApp', ['ui.router']);
+	var app = angular.module('ConfusedApp', ['ui.router']);
 	// Router of the application view, directs the html views on the ui-view element
 	app.config(function($urlRouterProvider, $stateProvider){
 		$stateProvider
@@ -46,19 +41,19 @@ var app = angular.module('ConfusedApp', ['ui.router']);
 	$scope.state = $state;
 	// Filters to show on filter area
 	$scope.filters = [
-		{
-			label: 'Finnish',
-			state: false,
-			id: 0
-		}, {
-			label: 'English',
-			state: false,
-			id: 1
-		}, {
-			label: 'Swedish',
-			state: false,
-			id: 2
-		}
+	{
+		label: 'Finnish',
+		state: false,
+		id: 0
+	}, {
+		label: 'English',
+		state: false,
+		id: 1
+	}, {
+		label: 'Swedish',
+		state: false,
+		id: 2
+	}
 	];
 
     // Listeners for function calls that $scope.$broadcast can activate from different controllers
@@ -160,6 +155,19 @@ var app = angular.module('ConfusedApp', ['ui.router']);
 	    });
     }
 
+    $scope.getCurrentLocation = () => {
+    	$scope.myMarker = VariableFactory.myLocationmarker;
+
+    	$log.info($scope.myMarker);
+
+    	// if the searchmarker of previous search is on map, remove it 
+    	if ($scope.Marker){
+    		$scope.myMarker.setMap(null);
+    	}
+
+    	MapService.getCurrentLocation();
+    }
+
     // Function for handling filtering with the checkboxes
     // TODO, have to figure out how to get individual school's language
     $scope.clickCheckBox = (event) => {
@@ -188,5 +196,16 @@ var app = angular.module('ConfusedApp', ['ui.router']);
     			Could not connect to Google Maps, please reload page.</h3>`);
     	}
     };
-    
+
+    $scope.toggleSideBar = () => {
+    	if (!$scope.showSideBar) {
+    		$scope.showSideBar = true;
+    		document.getElementById("sideBar").style.display = "block";
+    	} else {
+    		$scope.showSideBar = false;
+    		document.getElementById("sideBar").style.display = "none";
+    		
+    	}
+    }
+
 });

@@ -1,3 +1,7 @@
+.navbar {
+	height: 75px;
+}
+
 .navbar-custom {
 	background-color: #0072C6;
 }
@@ -16,6 +20,7 @@
 	color: #ffffff;
 }
 
+/* Navbar element stylings */
 .icon-bar {
 	background-color: #ffffff !important;
 }
@@ -25,7 +30,7 @@
 	background-color: transparent !important;
 }
 
-#loginBtn, #logoutBtn{
+#loginBtn {
 	position: relative;
 	right: 10px;
 	top: 5px;
@@ -37,6 +42,19 @@
 	top: -10px;
 }
 
+#userBtn {
+	width: 100px !important;
+}
+
+#user-icon {
+	height: 35px;
+    top: -5px;
+    position: relative;
+}
+
+/* End main nav */
+
+/* Secondary navigation styling */
 #secondNavDiv {
 	height: 60px;
 }
@@ -44,12 +62,13 @@
 #secondNav {
 	background-color: #ffffff;
 	margin-bottom: 10px;
+	margin-top: 10px;
 	vertical-align: middle;
 }
 
-#secondNav *{
+#secondNav * {
 	top: 5px;
-	position: relative
+	position: relative;
 }
 
 #childSelect {
@@ -60,3 +79,68 @@
 	display: none;
 	word-wrap: break-word;
 }
+/* End secondary nav */
+
+/* Mobile secondary nav styling */
+#mobileNavDiv {
+	display:none;
+}
+
+#mobileNav {
+	top: 5px;
+	display: inline-block;
+}
+
+#mobile-menu-icon{
+	height: 35px;	
+}
+/* End mobile nav */
+
+ul .dropdown-menu {
+	top: 45px;
+	padding: 15px !important;
+	min-width: 250px !important;
+}
+
+/* Change the styling of some elements in mobile view */ 
+@media (max-width: 767px) {
+
+	#loginBtn, #LogoutBtn{
+		top: 0px !important;
+	}
+
+	ul .dropdown-menu {
+		position: absolute !important;
+		background-color: #ffffff !important;
+		top: 40px;
+		left: -115%;
+		-webkit-background-clip: padding-box !important;
+		background-clip: padding-box !important;
+		border: 1px solid rgba(0,0,0,.15) !important;
+		border-radius: .25rem !important;
+	}
+
+	#secondNavDiv, #searchArea, #filterArea {
+		display: none !important;
+	}
+
+	#mobileNavDiv {
+		display: inline;
+	}
+}
+
+
+/* Sidebar styling */
+#sideBar {
+	background-color: transparent;
+	top: 140px;
+	left: 5px;
+	height: 200px;
+}
+
+.w3-button {
+	background-color: #ffffff !important;
+	margin-top: 5px !important;
+	border: 1px solid rgba(0,0,0,.15) !important;
+}
+/* End sidebar */

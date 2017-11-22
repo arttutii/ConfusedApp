@@ -18,6 +18,47 @@ app.service('MapService', function($log, $rootScope, VariableFactory) {
 			}
 		},
 
+		getCurrentLocation: () => {
+			let map = VariableFactory.map;
+			let myLocationMarker = VariableFactory.myLocationMarker;
+
+			myLocationMarker = new google.maps.Marker({
+				map: map,
+				animation: google.maps.Animation.DROP,
+				title: 'Olet täällä.'
+			});
+
+			myLocationMarker.addListener('click', () => {
+				if (myLocationMarker.getAnimation() !== null) {
+					myLocationMarker.setAnimation(null);
+				} else {
+					myLocationMarker.setAnimation(google.maps.Animation.BOUNCE);
+					setTimeout(() => {
+						myLocationMarker.setAnimation(null);
+					}, 2200);
+				}
+			});
+
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(function(pos) {
+					let me = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+					myLocationMarker.setPosition(me);
+
+					setTimeout(function(){
+						map.setCenter(me);
+						map.setZoom(12);
+					}, 2000);
+					
+				}, function(error) {
+					console.log(error);
+				});
+				
+			} else {
+				// Browser does not support Geolocation
+				// -- maybe show error somewhere on UI
+			}
+		},
+
 		initMap: () => {
 			VariableFactory.map = new google.maps.Map(document.getElementById('map'), {
 				mapTypeId: 'terrain',
@@ -66,9 +107,14 @@ app.service('MapService', function($log, $rootScope, VariableFactory) {
 				$rootScope.$broadcast('getPlacePhoto', text.name);
 
 			});
-
-			let myLocationMarker = new google.maps.Marker({
-				map: map,
+			// if the searchmarker of previous search is on map, remove it 
+    		if (VariableFactory.myLocationMarker){
+    			VariableFactory.myLocationMarker.setMap(null);
+    		}
+			// locate the user and pinpoint them on the map
+			let myLocationMarker = VariableFactory.myLocationMarker;
+			myLocationMarker = new google.maps.Marker({
+				map: VariableFactory.map,
 				animation: google.maps.Animation.DROP,
 				title: 'Olet täällä.'
 			});
@@ -84,7 +130,6 @@ app.service('MapService', function($log, $rootScope, VariableFactory) {
 				}
 			});
 
-			// locate the user and pinpoint them on the map
 			if (navigator.geolocation) {
 				navigator.geolocation.getCurrentPosition(function(pos) {
 					let me = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
@@ -98,8 +143,11 @@ app.service('MapService', function($log, $rootScope, VariableFactory) {
 				}, function(error) {
 					console.log(error);
 				});
-			} 
-
+				
+			} else {
+				// Browser does not support Geolocation
+				// -- maybe show error somewhere on UI
+			}
 		},
 
 		getPlacePhoto: (placeId) => {

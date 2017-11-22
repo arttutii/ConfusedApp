@@ -4,10 +4,12 @@ app.factory('VariableFactory', function($log) {
 	// Map object 	
 	let map;
 	let user;
+	let myLocationMarker;
 
 	return {
 		map,
-		user
+		user,
+		myLocationMarker
 	};
 
 });
