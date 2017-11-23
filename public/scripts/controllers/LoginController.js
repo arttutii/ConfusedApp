@@ -28,6 +28,8 @@ app.controller('LoginController',function($scope, $rootScope, $log, VariableFact
         $scope.loggedIn = false;
         // if the user is at the Personal information page, redirect them to map page
         if ($state.is('info')) {$state.go('map')};
+
+        $('#userBtn').click();
     }
 
 });

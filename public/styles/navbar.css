@@ -2,6 +2,10 @@
 	height: 75px;
 }
 
+#navbarDiv {
+	padding: 0px;
+}
+
 .navbar-custom {
 	background-color: #0072C6;
 }
@@ -43,13 +47,26 @@
 }
 
 #userBtn {
-	width: 100px !important;
+	width: 120px !important;
+	display: inline-flex;
+	color: white;
+}
+
+#userBtn:hover {
+	background-color: #0072F6 !important;
+	cursor: pointer;
 }
 
 #user-icon {
 	height: 35px;
-    top: -5px;
-    position: relative;
+	top: -5px;
+	position: relative;
+	color: white;
+}
+
+#user-icon-text {
+	position: relative;
+	top: -5px;
 }
 
 /* End main nav */
@@ -104,10 +121,6 @@ ul .dropdown-menu {
 
 /* Change the styling of some elements in mobile view */ 
 @media (max-width: 767px) {
-
-	#loginBtn, #LogoutBtn{
-		top: 0px !important;
-	}
 
 	ul .dropdown-menu {
 		position: absolute !important;

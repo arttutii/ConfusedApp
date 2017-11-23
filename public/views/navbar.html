@@ -1,4 +1,4 @@
-<div id="navbar" class="col-md-12" ng-controller="LoginController">
+<div id="navbarDiv" class="col-md-12" ng-controller="LoginController">
 	<nav class="navbar navbar-custom navbar-fixed-top">
 		<div class="navbar-header">
 			<a class="navbar-brand" href="#">
@@ -9,8 +9,9 @@
 					<li class="dropdown">
 						
 						<!-- User menu -->
-						<a class="" id="userBtn" ng-show="loggedIn" data-toggle="dropdown" >
+						<a class="" id="userBtn" ng-show="loggedIn" data-toggle="dropdown">
 							<img id="user-icon" src="../assets/images/user-icon.svg"  alt="">
+							<b id="user-icon-text">Oma Käyttäjä</b>
 						</a>
 						<!-- Login button with collapseable div -->
 						<input type="button" id="loginBtn" class="btn btn-default dropdown-toggle" data-toggle="dropdown" value="Kirjaudu sisään" ng-hide="loggedIn">
@@ -71,8 +72,8 @@
 	<div class="row" id="secondNavDiv">
 		<div class="col-md-12" id="secondNav">
 			<div class="pull-left" id="navigationButtons">
-				<input type="button" class="btn btn-default" value="Koulukartta" ui-sref="map">
-				<input type="button" class="btn btn-default" value="Henkilötiedot" ng-show="loggedIn" ui-sref="info">
+				<input type="button" class="btn mapBtn" value="Koulukartta" ui-sref="map">
+				<input type="button" class="btn infoBtn" value="Henkilötiedot" ng-show="loggedIn" ui-sref="info">
 			</div>
 
 			<div class="alert alert-danger col-md-6 col-lg-6 col-xl-6 col-sm-12" id="inputAlert">
@@ -89,12 +90,12 @@
 
 	<div class="row" id="mobileNavDiv" ng-controller="MainController">
 		<div class="pull-left col-sm-1 col-xs-1">
-			<a class="" href="#" ng-click="toggleSideBar()">
+			<a class="" id="mobileMenu" href="" ng-click="toggleSideBar()">
 				<img id="mobile-menu-icon" src="../assets/images/menu-icon.svg" class="" alt="">
 			</a>
 		</div>
 
-		<div class="input-group col-sm-11 col-xs-10 pull-right">
+		<div class="input-group col-sm-11 col-xs-10 pull-right" ng-show="state.is('map')">
 			<span id="searchIcon" class="icon"><i class="fa fa-search"></i></span>
 			<input type="text" id="searchBar" class="form-control" placeholder="Kirjoita osoite" ng-model="searchQuery" ng-keyup="$event.keyCode == 13 && mapSearch('searchInput')" maxlength="50">
 			<span class="input-group-btn">
@@ -110,8 +111,8 @@
 					<option id="child-{{$index}}" value="" hidden></option>
 				</select>
 			</div>
-			<a href="#" class="w3-bar-item w3-button">Link 2</a>
-			<a href="#" class="w3-bar-item w3-button">Link 3</a>
+			<input type="button" class="w3-bar-item w3-button mapBtn" value="Koulukartta" ui-sref="map">
+			<input type="button" class="w3-bar-item w3-button infoBtn" value="Henkilötiedot" ng-show="loggedIn" ui-sref="info" ng-click="toggleSideBar()">
 		</div>
 
 	</div>

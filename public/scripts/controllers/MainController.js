@@ -16,7 +16,15 @@
 
 		.state('map', {
 			url: '/',
-			templateUrl: '../../views/mainpage.html'
+			templateUrl: '../../views/mainpage.html',
+			controller: function(VariableFactory, $state, $scope) {
+				$('.mapBtn').attr('style', `
+						background-color: #0077C4 !important; 
+						font-weight: bold;
+						color: #ffffff;
+					`);
+				$('.infoBtn').removeAttr('style');
+			}
 		})
 
 		.state('info', {
@@ -27,6 +35,12 @@
 				if (VariableFactory.user == null){   
 					$state.go('map');
 				}
+				$('.infoBtn').attr('style', `
+						background-color: #0077C4 !important; 
+						font-weight: bold;
+						color: #ffffff;
+					`);
+				$('.mapBtn').removeAttr('style');
 			}
 		}) 
 
@@ -156,13 +170,9 @@
     }
 
     $scope.getCurrentLocation = () => {
-    	$scope.myMarker = VariableFactory.myLocationmarker;
-
-    	$log.info($scope.myMarker);
-
     	// if the searchmarker of previous search is on map, remove it 
-    	if ($scope.Marker){
-    		$scope.myMarker.setMap(null);
+    	if (VariableFactory.myLocationMarker){
+    		VariableFactory.myLocationMarker.setMap(null);
     	}
 
     	MapService.getCurrentLocation();

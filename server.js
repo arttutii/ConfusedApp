@@ -13,9 +13,6 @@ app.use(express.static('public'));
 // Serve node modules for webpage files to usex
 app.use('/modules', express.static(__dirname + '/node_modules'));
 
-// HTTPS for Jelastic
-app.enable('trust proxy');
-
 // Create SSL for HTTPS site
 app.use(forceSSL);
 
@@ -24,10 +21,9 @@ const options = {
   cert: fs.readFileSync('encryption/cert.pem')
 };
 
-app.listen(3000);
 // Configure application to port 3000
-/*const httpServer = http.createServer(app).listen(3000);
-const httpsServer = https.createServer(options, app).listen(8080);*/
+const httpServer = http.createServer(app).listen(3000);
+const httpsServer = https.createServer(options, app).listen(8080);
 
 
 console.log('Serving');

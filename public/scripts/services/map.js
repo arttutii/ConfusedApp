@@ -20,13 +20,13 @@ app.service('MapService', function($log, $rootScope, VariableFactory) {
 
 		getCurrentLocation: () => {
 			let map = VariableFactory.map;
-			let myLocationMarker = VariableFactory.myLocationMarker;
 
-			myLocationMarker = new google.maps.Marker({
+			let myLocationMarker = new google.maps.Marker({
 				map: map,
 				animation: google.maps.Animation.DROP,
 				title: 'Olet täällä.'
 			});
+
 
 			myLocationMarker.addListener('click', () => {
 				if (myLocationMarker.getAnimation() !== null) {
@@ -39,15 +39,16 @@ app.service('MapService', function($log, $rootScope, VariableFactory) {
 				}
 			});
 
+			// Save the marker in the variablefactory for use in MainController
+			VariableFactory.myLocationMarker = myLocationMarker;
+
 			if (navigator.geolocation) {
 				navigator.geolocation.getCurrentPosition(function(pos) {
 					let me = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
 					myLocationMarker.setPosition(me);
 
-					setTimeout(function(){
-						map.setCenter(me);
-						map.setZoom(12);
-					}, 2000);
+					map.setCenter(me);
+					map.setZoom(12);
 					
 				}, function(error) {
 					console.log(error);

@@ -9,17 +9,17 @@ html *{
 
 /* Regular font*/
 @font-face {
-    font-family: Grotesk;
-    src: url("../../assets/fonts/HKGrotesk-Regular.woff") format("woff"), 
-    	 url("../../assets/fonts/HKGrotesk-Regular.ttf") format("truetype");
+	font-family: Grotesk;
+	src: url("../../assets/fonts/HKGrotesk-Regular.woff") format("woff"), 
+	url("../../assets/fonts/HKGrotesk-Regular.ttf") format("truetype");
 }
 
 /* Bolded font*/
 @font-face {
-    font-family: Grotesk;
-    src: url("../../assets/fonts/HKGrotesk-Bold.woff") format("woff"), 
-    	 url("../../assets/fonts/HKGrotesk-Bold.ttf") format("truetype");
-    font-weight: bold;
+	font-family: Grotesk;
+	src: url("../../assets/fonts/HKGrotesk-Bold.woff") format("woff"), 
+	url("../../assets/fonts/HKGrotesk-Bold.ttf") format("truetype");
+	font-weight: bold;
 }
 
 #mapWrapper {
@@ -48,8 +48,23 @@ html *{
 	max-height: 480px;
 }
 
+@media (max-width: 767px) {
+	#infoArea {
+		left: 0px !important;
+		box-shadow: none;
+		border: rgba(0,0,0,.15);
+		position: initial !important;
+	}
+
+	#schoolPic {
+		max-height: 250px;
+		max-width: 300px;
+	}
+}
+
 #schoolDesc {
 	word-wrap: break-word;
+	margin-top: 5px;
 }
 
 #schoolPic {
@@ -88,6 +103,7 @@ html *{
 .btn-secondary {
 	border: 1px solid rgba(0,0,0,.15) !important;
 }
+
 /* End search styling */
 
 /* Filter area style */
