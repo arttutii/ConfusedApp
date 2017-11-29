@@ -2,10 +2,6 @@
 	height: 75px;
 }
 
-#navbarDiv {
-	padding: 0px;
-}
-
 .navbar-custom {
 	background-color: #0072C6;
 }
@@ -37,7 +33,7 @@
 #loginBtn {
 	position: relative;
 	right: 10px;
-	top: 5px;
+	top: 12px;
 }
 
 #helsinki-logo {
@@ -47,9 +43,11 @@
 }
 
 #userBtn {
+	top: -15px;
 	width: 120px !important;
 	display: inline-flex;
 	color: white;
+	height: 80px;
 }
 
 #userBtn:hover {
@@ -59,14 +57,14 @@
 
 #user-icon {
 	height: 35px;
-	top: -5px;
+	top: 10px;
 	position: relative;
 	color: white;
 }
 
 #user-icon-text {
 	position: relative;
-	top: -5px;
+	top: 10px;
 }
 
 /* End main nav */
@@ -88,14 +86,27 @@
 	position: relative;
 }
 
-#childSelect {
+#childSelect, #mobileChildSelect {
 	height: 75%;
 }
 
 #inputAlert {
+	position: absolute;
 	display: none;
-	word-wrap: break-word;
+	height: 40px;
+	width: 480px;
+	top: 7px;
+	left: 250px;
 }
+
+#inputAlert * {
+	top: -5px;
+}
+
+#inputAlert span {
+	font-size: 13px;
+}
+
 /* End secondary nav */
 
 /* Mobile secondary nav styling */
@@ -133,12 +144,25 @@ ul .dropdown-menu {
 		border-radius: .25rem !important;
 	}
 
+	#navbarDiv {
+		padding: 0px;
+	}
+
 	#secondNavDiv, #searchArea, #filterArea {
 		display: none !important;
 	}
 
 	#mobileNavDiv {
 		display: inline;
+	}
+
+	#loginBtn {
+		top: 6px;
+	}
+
+	#userBtn {
+		top: -15px;
+		height: 75px;
 	}
 }
 

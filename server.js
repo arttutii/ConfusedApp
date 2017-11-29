@@ -13,6 +13,8 @@ app.use(express.static('public'));
 // Serve node modules for webpage files to usex
 app.use('/modules', express.static(__dirname + '/node_modules'));
 
+app.enable('trust proxy');
+
 // Create SSL for HTTPS site
 app.use(forceSSL);
 
@@ -24,7 +26,6 @@ const options = {
 // Configure application to port 3000
 const httpServer = http.createServer(app).listen(3000);
 const httpsServer = https.createServer(options, app).listen(8080);
-
 
 console.log('Serving');
 

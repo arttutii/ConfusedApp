@@ -74,10 +74,11 @@
 			<div class="pull-left" id="navigationButtons">
 				<input type="button" class="btn mapBtn" value="Koulukartta" ui-sref="map">
 				<input type="button" class="btn infoBtn" value="Henkilötiedot" ng-show="loggedIn" ui-sref="info">
+				<input type="button" class="btn formBtn" value="Kouluhakemus" ng-show="loggedIn" ui-sref="form">
 			</div>
 
-			<div class="alert alert-danger col-md-6 col-lg-6 col-xl-6 col-sm-12" id="inputAlert">
-				<strong>Virhe!</strong> Haullasi ei löytynyt osoitetta, kokeile uudelleen toisella hakusanalla.
+			<div class="alert alert-danger col-md-8 col-lg-6 col-xl-6 col-sm-12" id="inputAlert">
+				<strong>Virhe!</strong> <span>Haullasi ei löytynyt osoitetta, kokeile uudelleen toisella hakusanalla. </span>
 			</div>
 
 			<div class="form-group pull-right" id="selectDiv" ng-show="loggedIn">
@@ -106,13 +107,14 @@
 
 		<!-- Sidebar -->	
 		<div class="w3-sidebar w3-bar-block w3-animate-left" style="display:none" id="sideBar">
-			<div class="form-group" id="selectDiv" ng-show="loggedIn">
-				<select class="form-control" id="childSelect" ng-model="selectedChild" data-ng-options="child as child.name for child in parent.children">
+			<div class="form-group" id="mobileSelectDiv" ng-show="loggedIn">
+				<select class="form-control" id="mobileChildSelect" ng-model="selectedChild" data-ng-options="child as child.name for child in parent.children" >
 					<option id="child-{{$index}}" value="" hidden></option>
 				</select>
 			</div>
-			<input type="button" class="w3-bar-item w3-button mapBtn" value="Koulukartta" ui-sref="map">
+			<input type="button" class="w3-bar-item w3-button mapBtn" value="Koulukartta" ui-sref="map" ng-click="toggleSideBar()">
 			<input type="button" class="w3-bar-item w3-button infoBtn" value="Henkilötiedot" ng-show="loggedIn" ui-sref="info" ng-click="toggleSideBar()">
+			<input type="button" class="w3-bar-item w3-button formBtn" value="Kouluhakemus" ng-show="loggedIn" ui-sref="form" ng-click="toggleSideBar()">
 		</div>
 
 	</div>

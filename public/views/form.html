@@ -1,0 +1,40 @@
+<div id="formPage" ng-controller="FormController" data-ng-init="currentYear()">
+	<div class="row col-md-12">
+		<div id="formSteps" class="col-md-4">
+			<div class="row">
+				<button class="formButton btn btn-default">1</button>
+				<p>Hakutoive</p>
+			</div>
+			<div class="row">
+				<button class="formButton btn btn-default">2</button>
+				<p>Huoltajan tiedot</p>
+			</div>
+			<div class="row">
+				<button class="formButton btn btn-default">3</button>
+				<p>Lapsen tiedot</p>
+			</div>
+			<div class="row">
+				<button class="formButton btn btn-default">4</button>
+				<p>Yhteenveto ja lähetys</p>
+			</div>
+		</div>
+
+		<div id="formFields" class="col-md-8">
+			<div id="formSchoolInfo">
+				<div class="row">
+					<p>Aloituslukuvuosi: </p> <input type="text" id="startYearInput" required placeHolder="Kirjoita aloittava lukuvuosi">
+				</div>
+				<div class="row">
+					<p>Koulun nimi: {{selectedSchool.name}}</p>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<button class="btn btn-default float-left" id="previousBtn">Edellinen</button>
+			<button class="btn btn-default float-right" id="nextBtn">Seuraava</button>
+		</div>
+	</div>
+</div>

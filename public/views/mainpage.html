@@ -23,7 +23,7 @@
                 <h3 id="schoolTitle">Käyttöohjeet</h3>
                 <img id="schoolPic">
                 <p id="schoolDesc">Valitse kartalla oleva koulu nähdäksesi sen tietoja.<br> Voit hakea myös kirjoittamalla osoitteen ylläolevaan hakukenttään.</p>
-                <button id="applyBtn" class="btn btn-default" ng-show="loggedIn && showApplyBtn">Hae kouluun</button>
+                <button id="applyBtn" class="btn btn-default" ng-click="schoolApply()" ng-show="loggedIn && showApplyBtn">Hae kouluun</button>
             </div>
         </div> 
     </div>

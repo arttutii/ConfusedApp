@@ -57,6 +57,7 @@ app.service('MapService', function($log, $rootScope, VariableFactory) {
 			} else {
 				// Browser does not support Geolocation
 				// -- maybe show error somewhere on UI
+				$log.info('browser doesnt support geolocation')
 			}
 		},
 
@@ -107,11 +108,22 @@ app.service('MapService', function($log, $rootScope, VariableFactory) {
 				$rootScope.$broadcast('showContent', {e: 'info', text: text});
 				$rootScope.$broadcast('getPlacePhoto', text.name);
 
+				// Set map center and zoom in on the school pin
+				map.setCenter(kmlEvent.latLng);
+				map.setZoom(12);
+
+		    	// scroll site to bottom if on mobile device
+		    	const mq = window.matchMedia("(max-width: 767px)");
+		    	if(mq.matches) {
+		    		$("html, body").animate({ scrollTop: $(document).height() }, 500);
+		    	}
+
 			});
+
 			// if the searchmarker of previous search is on map, remove it 
-    		if (VariableFactory.myLocationMarker){
-    			VariableFactory.myLocationMarker.setMap(null);
-    		}
+			if (VariableFactory.myLocationMarker){
+				VariableFactory.myLocationMarker.setMap(null);
+			}
 			// locate the user and pinpoint them on the map
 			let myLocationMarker = VariableFactory.myLocationMarker;
 			myLocationMarker = new google.maps.Marker({
@@ -145,10 +157,13 @@ app.service('MapService', function($log, $rootScope, VariableFactory) {
 					console.log(error);
 				});
 				
-			} else {
-				// Browser does not support Geolocation
-				// -- maybe show error somewhere on UI
-			}
+			} 
+
+			// At the end when KML layers have been loaded, set center of the map
+			// This is in case user has not allowed geolocation
+			// Coordinates hardcoded to Helsinki area
+			map.setCenter(new google.maps.LatLng(60.16985569999999,24.9383791));
+			map.setZoom(8);
 		},
 
 		getPlacePhoto: (placeId) => {
@@ -161,11 +176,9 @@ app.service('MapService', function($log, $rootScope, VariableFactory) {
 			service.getDetails(request, (place, status) => {
 				if (status == google.maps.places.PlacesServiceStatus.OK) {
 					let photos = place.photos;
+					console.log(place);
 
 					// if there are photos for the location, add them to the info area
-					// else, show a error image
-
-					console.log(place);
 					$rootScope.$broadcast('showContent', 
 					{
 						e: 'pic', 

@@ -3,8 +3,6 @@
 /** TODO:
 
 	** Navbar
-	Implement alert feature in the middle of the secondary navigation
-	Tom's new mobile design and stuff
 	Add language options in the middle of navbar (npm angular-localize)
 
 	**/
@@ -19,11 +17,11 @@
 			templateUrl: '../../views/mainpage.html',
 			controller: function(VariableFactory, $state, $scope) {
 				$('.mapBtn').attr('style', `
-						background-color: #0077C4 !important; 
-						font-weight: bold;
-						color: #ffffff;
+					background-color: #0077C4 !important; 
+					font-weight: bold;
+					color: #ffffff;
 					`);
-				$('.infoBtn').removeAttr('style');
+				$('.infoBtn, .formBtn').removeAttr('style');
 			}
 		})
 
@@ -36,13 +34,31 @@
 					$state.go('map');
 				}
 				$('.infoBtn').attr('style', `
-						background-color: #0077C4 !important; 
-						font-weight: bold;
-						color: #ffffff;
+					background-color: #0077C4 !important; 
+					font-weight: bold;
+					color: #ffffff;
 					`);
-				$('.mapBtn').removeAttr('style');
+				$('.mapBtn, .formBtn').removeAttr('style');
 			}
 		}) 
+
+		.state('form', {
+			url: '/hakemus',
+			templateUrl: '../../views/form.html',
+			controller: function(VariableFactory, $state) {
+				// Prevent user from visiting user info page if they are not logged in
+				if (VariableFactory.user == null){   
+					$state.go('map');
+				}
+				$('.formBtn').attr('style', `
+					background-color: #0077C4 !important; 
+					font-weight: bold;
+					color: #ffffff;
+					`);
+				$('.mapBtn, .infoBtn').removeAttr('style');
+			}
+		}) 
+
 
 		$urlRouterProvider.otherwise('/');
 
@@ -69,6 +85,9 @@
 		id: 2
 	}
 	];
+
+	// Variable for the child select option to show on the info page
+	$scope.selectedChild;
 
     // Listeners for function calls that $scope.$broadcast can activate from different controllers
     $scope.$on('showContent', (event, data) => {
@@ -107,17 +126,10 @@
     	}).then(function successCallback(response) {
     		let locData, newLocation;
 
-    		// If the query does not find a location, show an alert window
-    		try {
+    		if(response.data.results[0]){
     			locData = response.data.results[0].geometry.location;
     			newLocation = new google.maps.LatLng(locData.lat, locData.lng);
-    		} catch (e){
-    			$('#inputAlert').show();
-    			setTimeout(() => {
-    				$('#inputAlert').fadeOut();
-    			}, 3500)
     		}
-
 
     		// Check for the first argument of the function call
     		switch(check){
@@ -130,43 +142,51 @@
     			VariableFactory.map.setCenter(newLocation);
     			VariableFactory.map.setZoom(15);
     			break;
-
     		}
 
     		$log.info(response.data);
-    		// if the searchmarker of previous search is on map, remove it 
-    		if ($scope.searchMarker){
-    			$scope.searchMarker.setMap(null);
-    		}
-    		// add new marker of the current search
-    		$scope.searchMarker = new google.maps.Marker({
-    			map: VariableFactory.map,
-    			position: newLocation,
-    			title: response.data.results[0].formatted_address
-    		});
 
-    		// If the search was done via search input field, show different text on info area 
-    		if (check == 'searchInput'){
-    			// Do not show school apply button in the info area when no school info is present 
-    			$scope.showApplyBtn = false;
-    			$rootScope.$broadcast('showContent', {e: 'pic', text: ''});
-    			let text = {
-    				desc: 'Jos haluat nähdä koulun tiedot kartalla, paina koulun kohdalla olevaa sinistä merkkiä.',
-    				name: 'Paina merkkiä kartalla'
-    			}
-    			$rootScope.$broadcast('showContent', {e: 'info', text: text});
+    		if (response.data.status != 'OK') {
+    			// If no results are found, show error alert to user
+    			$('#inputAlert').show();
+    			setTimeout(() => {
+    				$('#inputAlert').fadeOut();
+    			}, 3500);
     		} else {
-    			// Show the apply button with the school information
-    			$scope.showApplyBtn = true;
-    			// Set the actual location on the text input
-    			$scope.searchQuery = response.data.results[0].formatted_address;
-	    		// Get photo of the location and show it on side div
-	    		MapService.getPlacePhoto(response.data.results[0].place_id);
-	    	}
+    			// if the searchmarker of previous search is on map, remove it 
+    			if ($scope.searchMarker){
+    				$scope.searchMarker.setMap(null);
+    			}
+	    		// add new marker of the current search
+	    		$scope.searchMarker = new google.maps.Marker({
+	    			map: VariableFactory.map,
+	    			position: newLocation,
+	    			title: response.data.results[0].formatted_address
+	    		});
 
-	    }, function errorCallback(response) {
-	    	$log.error("ERROR:", response.data);
-	    });
+	    		// If the search was done via search input field, show different text on info area 
+	    		if (check == 'searchInput'){
+	    			// Do not show school apply button in the info area when no school info is present 
+	    			$scope.showApplyBtn = false;
+	    			$rootScope.$broadcast('showContent', {e: 'pic', text: ''});
+	    			let text = {
+	    				desc: 'Jos haluat nähdä koulun tiedot kartalla, paina koulun kohdalla olevaa sinistä merkkiä.',
+	    				name: 'Paina merkkiä kartalla'
+	    			}
+	    			$rootScope.$broadcast('showContent', {e: 'info', text: text});
+	    		} else {
+	    			// Show the apply button with the school information
+	    			$scope.showApplyBtn = true;
+	    			// Set the actual location on the text input
+	    			$scope.searchQuery = response.data.results[0].formatted_address;
+		    		// Get photo of the location and show it on side div
+		    		MapService.getPlacePhoto(response.data.results[0].place_id);
+		    	}
+		    }
+
+		}, function errorCallback(response) {
+			$log.error("ERROR:", response.data);
+		});
     }
 
     $scope.getCurrentLocation = () => {
@@ -186,14 +206,24 @@
     		case 'all':
     			//$log.info('all')
     			break;
-    			case 'finnish':
+    		case 'finnish':
     			//$log.info('finnish')   			
     			break;
-    			case 'swedish':
+    		case 'swedish':
     			//$log.info('swedish')
     			break;    	
-    		}
+    	}
+	};
+
+    $scope.schoolApply = () => {
+    	let schoolObject = {
+    		name: $('#schoolTitle').text(),
+    		desc: $('#schoolDesc').text()
     	};
+
+    	VariableFactory.selectedSchool = schoolObject;
+    	$state.go('form');
+    };
 
     // Initialize map when document has loaded
     $scope.initialize = () => {
@@ -217,5 +247,9 @@
     		
     	}
     }
+
+    $('#mobileMenu').click( () => {
+    	$log.info('selChild:', $scope.selectedChild);
+    })
 
 });
