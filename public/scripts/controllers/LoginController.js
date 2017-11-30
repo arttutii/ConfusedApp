@@ -15,9 +15,63 @@ app.controller('LoginController',function($scope, $rootScope, $log, VariableFact
 
     $scope.login = () => {
     // HTTPS API calls won't work on Jelastic at the moment
-        fetch('/login').then(res => {
-            return res.json();
-        }).then(res => {
+        const res = {
+        name: 'Matti Meikäläinen',
+        age: 35,
+        children: 
+        [ 
+            {
+                // Personal information
+                name: 'Jussi Meikäläinen',
+                age: 7,
+                gender: 'Mies',
+                birthDate: '08-03-2010',
+                birthPlace: 'Helsinki, Finland',
+                residence: 'Helsinki',
+                address: 'Junailijankuja 7',
+                postalCode: '00520 HELSINKI',
+                phone: null,
+                email: null,
+                // Education
+                currentEducationName: 'Päiväkoti Meripirtti',
+                currentEducationPeriod: '20-04-2008 - 01-01-2011',
+                currentEducationContact: {
+                    phone: 'Puhelin: 09 3102 9904',
+                    address: 'Merimiehenkatu 43, 00150 Helsinki',
+                    email: 'Sähköposti: pk.meripirtti@hel.fi',
+                    principal: 'Johtaja: Riitta Tähtilaakso, puh. 09 3102 9904',
+                    principalEmail: 'Sähköposti: riitta.tahtilaakso@hel.fi',
+                },
+                currentEducationHomepage: 'https://www.hel.fi/helsinki/fi/kasvatus-ja-koulutus/paivahoito/paivakotihoito/paivakodit/paivakoti-meripirtti',
+            },
+            {
+                // Personal information
+                name: 'Ossi Meikäläinen',
+                age: 6,
+                gender: 'Mies',
+                birthDate: '15-01-2011',
+                birthPlace: 'Helsinki, Finland',
+                residence: 'Helsinki',
+                address: 'Junailijankuja 7',
+                postalCode: '00520 HELSINKI',
+                phone: null,
+                email: null,
+                // Education
+                currentEducationName: 'Päiväkoti Meripirtti',
+                currentEducationPeriod: '20-04-2008 - 01-01-2011',
+                currentEducationContact: {
+                    phone: 'Puhelin: 09 3102 9904',
+                    address: 'Merimiehenkatu 43, 00150 Helsinki',
+                    email: 'Sähköposti: pk.meripirtti@hel.fi',
+                    principal: 'Johtaja: Riitta Tähtilaakso, puh. 09 3102 9904',
+                    principalEmail: 'Sähköposti: riitta.tahtilaakso@hel.fi',
+                },
+                currentEducationHomepage: 'https://www.hel.fi/helsinki/fi/kasvatus-ja-koulutus/paivahoito/paivakotihoito/paivakodit/paivakoti-meripirtti',
+            
+            }
+
+        ]
+    };
             console.log(res);
             // save user object in the factory and in the scope
             $scope.parent = VariableFactory.user = res;
@@ -26,7 +80,7 @@ app.controller('LoginController',function($scope, $rootScope, $log, VariableFact
 
             // after successful log in, change loggedIn variable state that some elements show/hide.
             // also toggle the popup to close it
-            $scope.$apply($scope.loggedIn = true)
+            $scope.loggedIn = true;
             $('#loginBtn').click();
 
             // save the user in the session storage
@@ -36,8 +90,6 @@ app.controller('LoginController',function($scope, $rootScope, $log, VariableFact
             if(!$state.is('map')) {
                 $state.go('map');
             }
-
-        });
 
     }
 
