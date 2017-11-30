@@ -1,20 +1,20 @@
 <div id="formPage" ng-controller="FormController" data-ng-init="currentYear()">
-	<div class="row col-md-12" ng-show="selectedSchool">
+	<div class="row col-md-12" >
 		<div id="formSteps" class="col-md-4">
 			<div class="row">
-				<button class="formButton btn btn-default">1</button>
+				<button class="formButton btn btn-default" ng-click="activeStep = 1">1</button>
 				<p>Hakutoive</p>
 			</div>
 			<div class="row">
-				<button class="formButton btn btn-default">2</button>
+				<button class="formButton btn btn-default" ng-click="activeStep = 2">2</button>
 				<p>Huoltajan tiedot</p>
 			</div>
 			<div class="row">
-				<button class="formButton btn btn-default">3</button>
+				<button class="formButton btn btn-default" ng-click="activeStep = 3">3</button>
 				<p>Lapsen tiedot</p>
 			</div>
 			<div class="row">
-				<button class="formButton btn btn-default">4</button>
+				<button class="formButton btn btn-default" ng-click="activeStep = 4">4</button>
 				<p>Yhteenveto ja lähetys</p>
 			</div>
 		</div>

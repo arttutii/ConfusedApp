@@ -118,7 +118,7 @@ app.service('MapService', function($log, $rootScope, VariableFactory) {
 		    		$("html, body").animate({ scrollTop: $(document).height() }, 500);
 		    	}
 
-			});
+		    });
 
 			// if the searchmarker of previous search is on map, remove it 
 			if (VariableFactory.myLocationMarker){
@@ -155,15 +155,16 @@ app.service('MapService', function($log, $rootScope, VariableFactory) {
 					
 				}, function(error) {
 					console.log(error);
-				});
+					// At the end when KML layers have been loaded, set center of the map
+					// This is in case user has not allowed geolocation
+					// Coordinates hardcoded to Helsinki area
+					map.setCenter(new google.maps.LatLng(60.16985569999999,24.9383791));
+						map.setZoom(8);
+					});
 				
 			} 
 
-			// At the end when KML layers have been loaded, set center of the map
-			// This is in case user has not allowed geolocation
-			// Coordinates hardcoded to Helsinki area
-			map.setCenter(new google.maps.LatLng(60.16985569999999,24.9383791));
-			map.setZoom(8);
+			
 		},
 
 		getPlacePhoto: (placeId) => {
