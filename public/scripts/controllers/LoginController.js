@@ -95,8 +95,8 @@ app.controller('LoginController',function($scope, $rootScope, $log, VariableFact
 
     $scope.logout = () => {
         $scope.loggedIn = false;
-        // if the user is at the Personal information page, redirect them to map page
-        if ($state.is('info')) {$state.go('map')};
+        // if the user is at any other page, redirect them to map page
+        if (!$state.is('map')) {$state.go('map')};
 
         // Trigger the closing of the user menu
         $('#userBtn').click();
