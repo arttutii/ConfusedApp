@@ -10,7 +10,7 @@ const fs 	   = require('fs');
 // Configure the routing to serve public folder
 const app = express();
 app.use(express.static('public'));
-// Serve node modules for webpage files to usex
+// Serve node modules for frontend
 app.use('/modules', express.static(__dirname + '/node_modules'));
 
 app.enable('trust proxy');

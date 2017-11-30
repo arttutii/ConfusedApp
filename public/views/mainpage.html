@@ -12,9 +12,7 @@
         </div>
         <div class="col-md-2 col-sm-3 overMap" id="filterArea">
             <div class="filterDiv" ng-repeat="f in filters">
-                <button ng-click="clickCheckBox($event)" class="filterButton" ng-class="{activated : f.state}">
-                    {{f.label}}
-                </button>
+                <button ng-click="clickCheckBox($event)" class="filterButton" ng-class="{activated : f.state}"> {{f.label}} </button>
             </div>
         </div>
         <div class="col-md-12" id="map"></div>

@@ -1,5 +1,5 @@
 <div id="formPage" ng-controller="FormController" data-ng-init="currentYear()">
-	<div class="row col-md-12">
+	<div class="row col-md-12" >
 		<div id="formSteps" class="col-md-4">
 			<div class="row">
 				<button class="formButton btn btn-default">1</button>
@@ -31,10 +31,17 @@
 		</div>
 
 	</div>
-	<div class="row">
+	<div class="row" ng-show="selectedSchool">
 		<div class="col-md-12">
 			<button class="btn btn-default float-left" id="previousBtn">Edellinen</button>
 			<button class="btn btn-default float-right" id="nextBtn">Seuraava</button>
+		</div>
+	</div>
+	<div class="row" ng-hide="selectedSchool">
+		<div class="col-md-12">
+			<h2> Sivulla ei näy tietoja ennen kuin olet valinnut koulun.<br> <br>Valitse koulu karttanäkymästä ja paina tietoikkunan alareunassa sijaitsevaa painiketta.</h2>
+			<input type="button" class="btn btn-default" value="Siirry karttaan" ui-sref="map">
+			<br>
 		</div>
 	</div>
 </div>

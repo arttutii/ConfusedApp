@@ -6,7 +6,6 @@ app.controller('FormController',function($scope, $rootScope, $log, VariableFacto
 
 	$scope.currentYear = () => {
 		$('#startYearInput').val(new Date().getFullYear());
-		$log.info('qwe',new Date().getFullYear());
 	}
 
 });

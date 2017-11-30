@@ -1,12 +1,5 @@
 'use strict';
 
-/** TODO:
-
-	** Navbar
-	Add language options in the middle of navbar (npm angular-localize)
-
-	**/
-
 	var app = angular.module('ConfusedApp', ['ui.router']);
 	// Router of the application view, directs the html views on the ui-view element
 	app.config(function($urlRouterProvider, $stateProvider){
@@ -15,7 +8,7 @@
 		.state('map', {
 			url: '/',
 			templateUrl: '../../views/mainpage.html',
-			controller: function(VariableFactory, $state, $scope) {
+			controller: function(VariableFactory, $state) {
 				$('.mapBtn').attr('style', `
 					background-color: #0077C4 !important; 
 					font-weight: bold;
@@ -72,22 +65,19 @@
 	// Filters to show on filter area
 	$scope.filters = [
 	{
-		label: 'Finnish',
+		label: 'Suomi',
 		state: false,
 		id: 0
 	}, {
-		label: 'English',
+		label: 'Englanti',
 		state: false,
 		id: 1
 	}, {
-		label: 'Swedish',
+		label: 'Ruotsi',
 		state: false,
 		id: 2
 	}
 	];
-
-	// Variable for the child select option to show on the info page
-	$scope.selectedChild;
 
     // Listeners for function calls that $scope.$broadcast can activate from different controllers
     $scope.$on('showContent', (event, data) => {
@@ -247,9 +237,5 @@
     		
     	}
     }
-
-    $('#mobileMenu').click( () => {
-    	$log.info('selChild:', $scope.selectedChild);
-    })
 
 });

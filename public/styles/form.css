@@ -2,3 +2,9 @@
 	width: 35px;
 	margin-bottom: 40px !important;
 }
+
+p {
+    margin-bottom: 0 !important;
+    margin-top: 3px !important;
+    margin-right: 10px !important;
+}

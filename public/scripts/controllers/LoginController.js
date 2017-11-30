@@ -14,6 +14,7 @@ app.controller('LoginController',function($scope, $rootScope, $log, VariableFact
     }
 
     $scope.login = () => {
+    // HTTPS API calls won't work on Jelastic at the moment
         fetch('/login').then(res => {
             return res.json();
         }).then(res => {
@@ -30,6 +31,11 @@ app.controller('LoginController',function($scope, $rootScope, $log, VariableFact
 
             // save the user in the session storage
             sessionStorage.setItem('user', JSON.stringify(res));
+
+            // Direct the user if they are on any other view than map
+            if(!$state.is('map')) {
+                $state.go('map');
+            }
 
         });
 
