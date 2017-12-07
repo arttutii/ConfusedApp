@@ -6,8 +6,10 @@ app.controller('FormController',function($scope, $rootScope, $log, VariableFacto
 	$scope.activeStep = 1;
 	$scope.previousStep = 'step-1';
 
-	$scope.currentYear = () => {
+	$scope.initForm = () => {
+		// set some default values on initialising the view
 		$('#startYearInput').val(new Date().getFullYear());
+		$('#step-1').click();
 	}
 
 	$scope.setActiveStep = (e) => {
@@ -45,6 +47,26 @@ app.controller('FormController',function($scope, $rootScope, $log, VariableFacto
 				$('#formInfo-4').show();
 				break;
 		}
+	}
+
+	$scope.nextStep = (e) => {
+		$log.info($scope.activeStep, 'shit' + JSON.stringify($scope.activeStep - 1));
+		if (e == 'prev'){
+			$scope.setActiveStep({
+			target: {
+				id: $scope.activeStep - 1,
+				textContent: JSON.stringify($scope.activeStep - 1)
+			}
+		})
+		} else {
+			$scope.setActiveStep({
+			target: {
+				id: $scope.activeStep + 1,
+				textContent: JSON.stringify($scope.activeStep + 1)
+			}
+		})
+		}
+		
 	}
 
 });

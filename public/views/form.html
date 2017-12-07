@@ -1,6 +1,6 @@
-<div id="formPage" ng-controller="FormController" data-ng-init="currentYear()">
-	<div class="row col-md-12" ng-show="selectedSchool">
-		<div id="formSteps" class="col-md-4">
+<div id="formPage" ng-controller="FormController" data-ng-init="initForm()">
+	<div class="row col-md-12">
+		<div id="formSteps" class="col-md-4" ng-show="selectedSchool">
 			<div class="row">
 				<button class="formButton btn btn-primary activeStep" id="step-1" ng-click="setActiveStep($event)">1</button>
 				<p>Hakutoive</p>
@@ -19,7 +19,7 @@
 			</div>
 		</div>
 
-		<div id="formFields" class="col-md-8">
+		<div id="formFields" class="col-md-8" ng-show="selectedSchool">
 			<div id="formInfo-1" >
 				<div class="row">
 					<p>Aloituslukuvuosi: </p> <input type="text" id="startYearInput" required placeHolder="Kirjoita aloittava lukuvuosi">
@@ -56,42 +56,87 @@
 			</div>
 			<div id="formInfo-3" >
 				<div class="row">
-					<p>Etunimi: </p> <input type="text" required placeHolder="Huoltajan etunimi" value="Jussis
+					<p>Etunimi: </p> <input type="text" required placeHolder="Lapsen etunimi" value="Jussi
 					">
 				</div>
 				<div class="row">
-					<p>Sukunimi: </p> <input type="text" required placeHolder="Huoltajan sukunimi" value="Meikäläinen">
+					<p>Sukunimi: </p> <input type="text" required placeHolder="Lapsen sukunimi" value="Meikäläinen">
 				</div>
 				<div class="row">
-					<p>Henkilötunnus: </p> <input type="text" required placeHolder="Huoltajan sukunimi" value="121179-123A">
+					<p>Henkilötunnus: </p> <input type="text" required placeHolder="Lapsen henkilötunnus" value="010410-123A">
 				</div>
 				<div class="row">
-					<p>Lähiosoite: </p> <input type="text" required placeHolder="Huoltajan sukunimi" value="Kievarinkuja 3a">
+					<p>Lähiosoite ja toimipaikka: </p> <input type="text" required placeHolder="Lapsen lähiosoite" value="Kievarinkuja 3a 000360 Helsinki">
 				</div>
 			</div>
 			<div id="formInfo-4" >
 				<div class="row">
-					<p>Atre </p> <input type="text" id="startYearInput" required placeHolder="Kirjoita aloittava lukuvuosi">
+					<p style="font-weight: bold; font-size: 13;">Hakutoive (Koulu)</p>
+				</div>
+				<div class="row">
+					<p>Aloituslukuvuosi: 2017 </p> 
 				</div>
 				<div class="row">
 					<p>Koulun nimi: {{selectedSchool.name}}</p>
 				</div>
+				<div class="row">
+					<p style="font-weight: bold; font-size: 13;">Huoltajan tiedot</p>
+				</div>
+				<div class="row">
+					<p>Etunimi: Matti
+				</div>
+				<div class="row">
+					<p>Sukunimi: Meikäläinen</p>
+				</div>
+				<div class="row">
+					<p>Henkilötunnus: 121179-123A</p> 
+				</div>
+				<div class="row">
+					<p>Lähiosoite: Kievarinkuja 3a</p>
+				</div>
+				<div class="row">
+					<p>Postinumero ja toimipaikka: 000360 Helsinki</p>
+				</div>
+				<div class="row">
+					<p>Puhelinnumero: 05012341234</p>
+				</div>
+				<div class="row">
+					<p>Sähköposti: matti.meikalainen@gmail.fi</p>
+				</div>
+				<div class="row">
+					<p style="font-weight: bold; font-size: 13;">Lapsen tiedot</p>
+				</div>
+				<div class="row">
+					<p>Etunimi: Jussi
+				</div>
+				<div class="row">
+					<p>Sukunimi: Meikäläinen</p>
+				</div>
+				<div class="row">
+					<p>Henkilötunnus: 010410-123A</p> 
+				</div>
+				<div class="row">
+					<p>Lähiosoite: Kievarinkuja 3a</p>
+				</div>
+				<div class="row">
+					<p>Postinumero ja toimipaikka: 000360 Helsinki</p>
+				</div>
 			</div>
 		</div>
-
-	</div>
-	<div class="row" ng-show="selectedSchool">
-		<div class="col-md-12">
-			<button class="btn btn-default float-left" id="previousBtn">Edellinen</button>
-			<button class="btn btn-default float-right" id="nextBtn">Seuraava</button>
-		</div>
-	</div>
-	<div class="row" ng-hide="selectedSchool">
+		<div class="row" ng-hide="selectedSchool">
 		<div class="col-md-12">
 			<br><br>
 			<h2> Sivulla ei näy tietoja ennen kuin olet valinnut koulun.<br> <br>Valitse koulu karttanäkymästä ja paina tietoikkunan alareunassa sijaitsevaa painiketta.</h2>
 			<input type="button" class="btn btn-default" value="Siirry karttaan" ui-sref="map">
 			<br>
+		</div>
+	</div>
+
+	</div>
+	<div class="row" ng-show="selectedSchool">
+		<div class="col-md-12">
+			<button class="btn btn-default float-left" ng-show="activeStep > 1" ng-click="nextStep('prev')"id="previousBtn">Edellinen</button>
+			<button class="btn btn-default float-right" ng-show="activeStep < 4" ng-click="nextStep('next')" id="nextBtn">Seuraava</button>
 		</div>
 	</div>
 </div>
