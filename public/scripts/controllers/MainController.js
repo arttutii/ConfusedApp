@@ -134,7 +134,7 @@
     			break;
     		}
 
-    		$log.info(response.data);
+    		//$log.info(response.data);
 
     		if (response.data.status != 'OK') {
     			// If no results are found, show error alert to user

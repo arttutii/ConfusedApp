@@ -6,7 +6,7 @@ app.service('MapService', function($log, $rootScope, VariableFactory) {
 			switch(e){
 				// handles the title and description text on the info area
 				case 'info':
-				$log.info(text)
+				//$log.info(text)
 				$('#schoolTitle').text(text.name);
 				$('#schoolDesc').html(text.desc);
 				break;
@@ -103,7 +103,7 @@ app.service('MapService', function($log, $rootScope, VariableFactory) {
 					name: kmlEvent.featureData.name,
 					info: kmlEvent.featureData.infoWindowHtml
 				}
-				console.log(kmlEvent);
+				//console.log(kmlEvent);
 				// show the content on the info area
 				$rootScope.$broadcast('showContent', {e: 'info', text: text});
 				$rootScope.$broadcast('getPlacePhoto', text.name);
@@ -177,7 +177,7 @@ app.service('MapService', function($log, $rootScope, VariableFactory) {
 			service.getDetails(request, (place, status) => {
 				if (status == google.maps.places.PlacesServiceStatus.OK) {
 					let photos = place.photos;
-					console.log(place);
+					//console.log(place);
 
 					// if there are photos for the location, add them to the info area
 					$rootScope.$broadcast('showContent', 
