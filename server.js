@@ -19,8 +19,8 @@ app.enable('trust proxy');
 app.use(forceSSL);
 
 const options = {
-  key: fs.readFileSync('encryption/key.pem'),
-  cert: fs.readFileSync('encryption/cert.pem')
+  key: fs.readFileSync('encryption/host.key'),
+  cert: fs.readFileSync('encryption/host.crt')
 };
 
 // Configure application to port 3000

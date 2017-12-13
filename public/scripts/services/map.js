@@ -158,13 +158,13 @@ app.service('MapService', function($log, $rootScope, VariableFactory) {
 					// At the end when KML layers have been loaded, set center of the map
 					// This is in case user has not allowed geolocation
 					// Coordinates hardcoded to Helsinki area
-					map.setCenter(new google.maps.LatLng(60.16985569999999,24.9383791));
+					setTimeout(function(){
+						map.setCenter(new google.maps.LatLng(60.16985569999999,24.9383791));
 						map.setZoom(8);
-					});
+					}, 2000);
+				});
 				
 			} 
-
-			
 		},
 
 		getPlacePhoto: (placeId) => {

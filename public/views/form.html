@@ -17,12 +17,14 @@
 				<button class="formButton btn btn-default" id="step-4" ng-click="setActiveStep($event)">4</button>
 				<p>Yhteenveto ja lähetys</p>
 			</div>
+			<button class="btn btn-default float-left" ng-show="activeStep > 1" ng-click="nextStep('prev')" id="previousBtn">Edellinen</button>
+			<button class="btn btn-default float-right" ng-show="activeStep < 4" ng-click="nextStep('next')" id="nextBtn">Seuraava</button>
 		</div>
 
 		<div id="formFields" class="col-md-8" ng-show="selectedSchool">
 			<div id="formInfo-1" >
 				<div class="row">
-					<p>Aloituslukuvuosi: </p> <input type="text" id="startYearInput" required placeHolder="Kirjoita aloittava lukuvuosi">
+					<p>Aloituslukuvuosi: </p> <input class="form-control" type="text" id="startYearInput" required placeHolder="Kirjoita aloittava lukuvuosi">
 				</div>
 				<div class="row">
 					<p>Koulun nimi: {{selectedSchool.name}}</p>
@@ -30,43 +32,42 @@
 			</div>
 			<div id="formInfo-2" >
 				<div class="row">
-					<p>Etunimi: </p> <input type="text" required placeHolder="Huoltajan etunimi" value="Matti">
+					<p>Etunimi: </p> <input class="form-control" type="text" required placeHolder="Huoltajan etunimi" value="Matti">
 				</div>
 				<div class="row">
-					<p>Sukunimi: </p> <input type="text" required placeHolder="Huoltajan sukunimi" value="Meikäläinen">
+					<p>Sukunimi: </p> <input class="form-control" type="text" required placeHolder="Huoltajan sukunimi" value="Meikäläinen">
 				</div>
 				<div class="row">
-					<p>Henkilötunnus: </p> <input type="text" required placeHolder="Huoltajan sukunimi" value="121179-123A">
+					<p>Henkilötunnus: </p> <input class="form-control" type="text" required placeHolder="Huoltajan sukunimi" value="121179-123A">
 				</div>
 				<div class="row">
-					<p>Lähiosoite: </p> <input type="text" required placeHolder="Huoltajan sukunimi" value="Kievarinkuja 3a">
+					<p>Lähiosoite: </p> <input class="form-control" type="text" required placeHolder="Huoltajan sukunimi" value="Kievarinkuja 3a">
 				</div>
 				<div class="row">
-					<p>Postinumero ja toimipaikka: </p> <input type="text" required value="000360 Helsinki">
+					<p>Postinumero ja toimipaikka: </p> <input class="form-control" type="text" required value="000360 Helsinki">
 				</div>
 				<div class="row">
-					<p>Puhelinnumero: </p> <input type="text" required placeHolder="Huoltajan sukunimi" value="05012341234">
+					<p>Puhelinnumero: </p> <input class="form-control" type="text" required placeHolder="Huoltajan sukunimi" value="05012341234">
 				</div>
 				<div class="row">
-					<p>Sähköposti: </p> <input type="text" required placeHolder="Huoltajan sukunimi" value="matti.meikalainen@gmail.fi">
+					<p>Sähköposti: </p> <input class="form-control" type="text" required placeHolder="Huoltajan sukunimi" value="matti.meikalainen@gmail.fi">
 				</div>
 				<div class="row">
-					<p>Kotona puhuttava kieli: </p> <input type="text" required placeHolder="Huoltajan sukunimi" value="Suomi">
+					<p>Kotona puhuttava kieli: </p> <input class="form-control" type="text" required placeHolder="Huoltajan sukunimi" value="Suomi">
 				</div>
 			</div>
 			<div id="formInfo-3" >
 				<div class="row">
-					<p>Etunimi: </p> <input type="text" required placeHolder="Lapsen etunimi" value="Jussi
-					">
+					<p>Etunimi: </p> <input class="form-control" type="text" required placeHolder="Lapsen etunimi" value="Jussi">
 				</div>
 				<div class="row">
-					<p>Sukunimi: </p> <input type="text" required placeHolder="Lapsen sukunimi" value="Meikäläinen">
+					<p>Sukunimi: </p> <input class="form-control" type="text" required placeHolder="Lapsen sukunimi" value="Meikäläinen">
 				</div>
 				<div class="row">
-					<p>Henkilötunnus: </p> <input type="text" required placeHolder="Lapsen henkilötunnus" value="010410-123A">
+					<p>Henkilötunnus: </p> <input class="form-control" type="text" required placeHolder="Lapsen henkilötunnus" value="010410-123A">
 				</div>
 				<div class="row">
-					<p>Lähiosoite ja toimipaikka: </p> <input type="text" required placeHolder="Lapsen lähiosoite" value="Kievarinkuja 3a 000360 Helsinki">
+					<p>Lähiosoite ja toimipaikka: </p> <input class="form-control" type="text" required placeHolder="Lapsen lähiosoite" value="Kievarinkuja 3a 000360 Helsinki">
 				</div>
 			</div>
 			<div id="formInfo-4" >
@@ -83,7 +84,7 @@
 					<p style="font-weight: bold; font-size: 13;">Huoltajan tiedot</p>
 				</div>
 				<div class="row">
-					<p>Etunimi: Matti
+					<p>Etunimi: Matti</p>
 				</div>
 				<div class="row">
 					<p>Sukunimi: Meikäläinen</p>
@@ -107,7 +108,7 @@
 					<p style="font-weight: bold; font-size: 13;">Lapsen tiedot</p>
 				</div>
 				<div class="row">
-					<p>Etunimi: Jussi
+					<p>Etunimi: Jussi</p>
 				</div>
 				<div class="row">
 					<p>Sukunimi: Meikäläinen</p>
@@ -124,19 +125,13 @@
 			</div>
 		</div>
 		<div class="row" ng-hide="selectedSchool">
-		<div class="col-md-12">
-			<br><br>
-			<h2> Sivulla ei näy tietoja ennen kuin olet valinnut koulun.<br> <br>Valitse koulu karttanäkymästä ja paina tietoikkunan alareunassa sijaitsevaa painiketta.</h2>
-			<input type="button" class="btn btn-default" value="Siirry karttaan" ui-sref="map">
-			<br>
+			<div class="col-md-12">
+				<br><br>
+				<h2> Sivulla ei näy tietoja ennen kuin olet valinnut koulun.<br> <br>Valitse koulu karttanäkymästä ja paina tietoikkunan alareunassa sijaitsevaa painiketta.</h2>
+				<input type="button" class="btn btn-default" value="Siirry karttaan" ui-sref="map">
+				<br>
+			</div>
 		</div>
-	</div>
 
-	</div>
-	<div class="row" ng-show="selectedSchool">
-		<div class="col-md-12">
-			<button class="btn btn-default float-left" ng-show="activeStep > 1" ng-click="nextStep('prev')"id="previousBtn">Edellinen</button>
-			<button class="btn btn-default float-right" ng-show="activeStep < 4" ng-click="nextStep('next')" id="nextBtn">Seuraava</button>
-		</div>
 	</div>
 </div>

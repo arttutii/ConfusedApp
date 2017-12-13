@@ -9,7 +9,9 @@ app.controller('FormController',function($scope, $rootScope, $log, VariableFacto
 	$scope.initForm = () => {
 		// set some default values on initialising the view
 		$('#startYearInput').val(new Date().getFullYear());
-		$('#step-1').click();
+		setTimeout(function(){
+			$('#step-1').click();
+		}, 50);
 	}
 
 	$scope.setActiveStep = (e) => {
@@ -23,48 +25,47 @@ app.controller('FormController',function($scope, $rootScope, $log, VariableFacto
 
 		switch(e.target.textContent){
 			case '1':
-				$('#formInfo-1').show();
-				$('#formInfo-2').hide();
-				$('#formInfo-3').hide();
-				$('#formInfo-4').hide();
-				break;
+			$('#formInfo-1').show();
+			$('#formInfo-2').hide();
+			$('#formInfo-3').hide();
+			$('#formInfo-4').hide();
+			break;
 			case '2':
-				$('#formInfo-1').hide();
-				$('#formInfo-2').show();
-				$('#formInfo-3').hide();
-				$('#formInfo-4').hide();
-				break;
+			$('#formInfo-1').hide();
+			$('#formInfo-2').show();
+			$('#formInfo-3').hide();
+			$('#formInfo-4').hide();
+			break;
 			case '3':
-				$('#formInfo-1').hide();
-				$('#formInfo-2').hide();
-				$('#formInfo-3').show();
-				$('#formInfo-4').hide();
-				break;
+			$('#formInfo-1').hide();
+			$('#formInfo-2').hide();
+			$('#formInfo-3').show();
+			$('#formInfo-4').hide();
+			break;
 			case '4':
-				$('#formInfo-1').hide();
-				$('#formInfo-2').hide();
-				$('#formInfo-3').hide();
-				$('#formInfo-4').show();
-				break;
+			$('#formInfo-1').hide();
+			$('#formInfo-2').hide();
+			$('#formInfo-3').hide();
+			$('#formInfo-4').show();
+			break;
 		}
 	}
 
 	$scope.nextStep = (e) => {
-		$log.info($scope.activeStep, 'shit' + JSON.stringify($scope.activeStep - 1));
 		if (e == 'prev'){
 			$scope.setActiveStep({
-			target: {
-				id: $scope.activeStep - 1,
-				textContent: JSON.stringify($scope.activeStep - 1)
-			}
-		})
+				target: {
+					id: ('step-' + (parseInt($scope.activeStep) - 1)).toString(),
+					textContent: (parseInt($scope.activeStep) - 1).toString()
+				}
+			})
 		} else {
 			$scope.setActiveStep({
-			target: {
-				id: $scope.activeStep + 1,
-				textContent: JSON.stringify($scope.activeStep + 1)
-			}
-		})
+				target: {
+					id: ('step-' + (parseInt($scope.activeStep) + 1)).toString(),
+					textContent: (parseInt($scope.activeStep) + 1).toString()
+				}
+			})
 		}
 		
 	}
