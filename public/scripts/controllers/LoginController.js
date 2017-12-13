@@ -2,7 +2,9 @@
 
 var app = angular.module('ConfusedApp');
 app.controller('LoginController',function($scope, $rootScope, $log, VariableFactory, $state){
+    // Variable for showing elements if the user is logged in
     $scope.loggedIn = false;
+    // User object of parent
     $scope.parent = {};
 
     // Check if the user object is already in the session storage
@@ -14,7 +16,7 @@ app.controller('LoginController',function($scope, $rootScope, $log, VariableFact
     }
 
     $scope.login = () => {
-    // HTTPS API calls won't work on Jelastic at the moment
+    // HTTPS API calls won't work on Jelastic at the moment, so hard code child user objects
         const res = {
         name: 'Matti Meikäläinen',
         age: 35,
@@ -72,7 +74,7 @@ app.controller('LoginController',function($scope, $rootScope, $log, VariableFact
 
         ]
     };
-            console.log(res);
+            //console.log(res);
             // save user object in the factory and in the scope
             $scope.parent = VariableFactory.user = res;
             // set the child select default value as the first child of the user

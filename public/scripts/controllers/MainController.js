@@ -201,10 +201,14 @@
     			break;
     		case 'swedish':
     			//$log.info('swedish')
+    			break;  
+    		case 'english':
+    			//$log.info('swedish')
     			break;    	
     	}
 	};
 
+	// Create an object with school's information and proceed to the form page
     $scope.schoolApply = () => {
     	let schoolObject = {
     		name: $('#schoolTitle').text(),
@@ -227,6 +231,7 @@
     	}
     };
 
+    // Onclick listener for showing the mobile view sidebar
     $scope.toggleSideBar = () => {
     	if (!$scope.showSideBar) {
     		$scope.showSideBar = true;
